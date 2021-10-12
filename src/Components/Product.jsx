@@ -33,6 +33,7 @@ const Container = styled.div`
 
   &:hover ${Info} {
     opacity: 1;
+    border-radius: 20px;
   }
 `
 const Circle = styled.div`

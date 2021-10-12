@@ -2,9 +2,11 @@ import React from 'react'
 import styled from 'styled-components'
 import { Search, ShoppingCartOutlined } from '@material-ui/icons'
 import { Badge } from '@material-ui/core'
+import { mobile, tablet } from '../responsive'
 
 const Container = styled.div`
   height: 60px;
+  ${tablet({ height: '100%' })}
 `
 
 const Wrapper = styled.div`
@@ -12,12 +14,14 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  ${tablet({ flexDirection: 'column' })}
 `
 
 const Left = styled.div`
   flex: 1;
   display: flex;
   align-items: center;
+  ${tablet({ width: '100%', justifyContent: 'space-between' })}
 `
 const Language = styled.span`
   font-size: 14px;
@@ -42,6 +46,7 @@ const Center = styled.div`
 `
 const Logo = styled.h1`
   font-weight: bold;
+  ${tablet({ fontSize: '34px' })}
 `
 
 const Right = styled.div`
@@ -49,12 +54,15 @@ const Right = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  ${tablet({ width: '100%', justifyContent: 'center' })}
+  ${mobile({ justifyContent: 'space-between' })}
 `
 
 const MenuItem = styled.div`
   font-size: 14px;
   cursor: pointer;
   margin-left: 25px;
+  ${mobile({ marginLeft: '0px' })}
 `
 
 const Navbar = () => {
@@ -64,7 +72,7 @@ const Navbar = () => {
         <Left>
           <Language>EN</Language>
           <SearchContainer>
-            <Input />
+            <Input placeholder='Search...' />
             <Search style={{ color: 'gray', fontSize: 16 }} />
           </SearchContainer>
         </Left>

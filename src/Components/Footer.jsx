@@ -8,15 +8,18 @@ import {
   Twitter,
 } from '@material-ui/icons'
 import styled from 'styled-components'
+import { mobile, tablet } from '../responsive'
 
 const Container = styled.div`
   display: flex;
+  ${tablet({ flexDirection: 'column' })}
 `
 const Left = styled.div`
   flex: 1;
   display: flex;
   flex-direction: column;
   padding: 20px;
+  ${tablet({ alignItems: 'center' })}
 `
 const Logo = styled.h1``
 const Desc = styled.p`
@@ -24,6 +27,7 @@ const Desc = styled.p`
 `
 const SocialContainer = styled.div`
   display: flex;
+  ${tablet({ justifyContent: 'center' })}
 `
 const SocialIcon = styled.div`
   width: 40px;
@@ -41,6 +45,7 @@ const SocialIcon = styled.div`
 const Center = styled.div`
   flex: 1;
   padding: 20px;
+  ${tablet({ display: 'none' })}
 `
 const Title = styled.h3`
   margin-bottom: 30px;
@@ -61,6 +66,7 @@ const ListItem = styled.li`
 const Right = styled.div`
   flex: 1;
   padding: 20px;
+  ${tablet({ backgroundColor: '#dedede' })}
 `
 const ContactItem = styled.div`
   margin-bottom: 20px;
@@ -70,13 +76,14 @@ const ContactItem = styled.div`
 const Payment = styled.img`
   width: 50%;
   height: 10%;
+  ${tablet({ height: '50px' })}
 `
 
 const Footer = () => {
   return (
     <Container>
       <Left>
-        <Logo>IMMO</Logo>
+        <Logo>ImmoStore</Logo>
         <Desc>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus maxime
           error perspiciatis nostrum. Corporis sequi maxime consequatur quod
