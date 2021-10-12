@@ -4,7 +4,6 @@ import Announcement from '../Components/Announcement'
 import Products from '../Components/Products'
 import Newsletter from '../Components/Newsletter'
 import Footer from '../Components/Footer'
-import { ArrowDownward, ArrowUpward } from '@material-ui/icons'
 
 const Container = styled.div``
 const Title = styled.h1`
