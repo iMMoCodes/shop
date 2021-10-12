@@ -21,3 +21,21 @@ export const sliderItems = [
     bg: 'fbf0f4',
   },
 ]
+
+export const categories = [
+  {
+    id: 1,
+    img: 'https://images.pexels.com/photos/297933/pexels-photo-297933.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
+    title: 'Category 1',
+  },
+  {
+    id: 2,
+    img: 'https://images.pexels.com/photos/7204241/pexels-photo-7204241.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
+    title: 'Category 2',
+  },
+  {
+    id: 3,
+    img: 'https://images.pexels.com/photos/2562992/pexels-photo-2562992.png?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
+    title: 'Category 3',
+  },
+]
