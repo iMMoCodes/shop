@@ -1,6 +1,8 @@
 import { Add, Remove } from '@material-ui/icons'
 import { useState, useEffect } from 'react'
 import { useLocation } from 'react-router'
+import { useDispatch } from 'react-redux'
+import { addProduct } from '../../redux/cartRedux'
 import Announcement from '../../Components/Announcement/Announcement'
 import Footer from '../../Components/Footer/Footer'
 import Navbar from '../../Components/Navbar/Navbar'
@@ -34,6 +36,7 @@ const Product = () => {
   const [quantity, setQuantity] = useState(1)
   const [color, setColor] = useState('')
   const [size, setSize] = useState('')
+  const dispatch = useDispatch()
 
   useEffect(() => {
     const getProduct = async () => {
@@ -56,6 +59,10 @@ const Product = () => {
     }
   }
 
+  const handleClick = () => {
+    dispatch(addProduct({ ...product, quantity, color, size }))
+  }
+
   return (
     <Container>
       <Announcement />
@@ -67,7 +74,7 @@ const Product = () => {
         <InfoContainer>
           <Title>{product.title}</Title>
           <Desc>{product.desc}</Desc>
-          <Price>{product.price}</Price>
+          <Price>{product.price} €</Price>
           <FilterContainer>
             <Filter>
               <FilterTitle>Color:</FilterTitle>
@@ -90,7 +97,7 @@ const Product = () => {
               <Amount>{quantity}</Amount>
               <Add onClick={() => handleQuantity('inc')} />
             </AmountContainer>
-            <Button>Add to Cart</Button>
+            <Button onClick={handleClick}>Add to Cart</Button>
           </AddContainer>
         </InfoContainer>
       </Wrapper>
