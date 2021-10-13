@@ -4,6 +4,7 @@ import {
   Route,
   Redirect,
 } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 import Home from './pages/Home/Home'
 import ProductList from './pages/ProductList/ProductList'
 import Product from './pages/Product/Product'
@@ -13,7 +14,7 @@ import Cart from './pages/Cart/Cart'
 import Success from './pages/Success/Success'
 
 const App = () => {
-  const user = true
+  const user = useSelector((state) => state.user.currentUser)
   return (
     <Router>
       <Switch>
