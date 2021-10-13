@@ -10,7 +10,6 @@ import Product from './pages/Product/Product'
 import Register from './pages/Register/Register'
 import Login from './pages/Login/Login'
 import Cart from './pages/Cart/Cart'
-import Pay from './pages/Pay/Pay'
 import Success from './pages/Success/Success'
 
 const App = () => {
@@ -29,6 +28,9 @@ const App = () => {
         </Route>
         <Route path='/cart'>
           <Cart />
+        </Route>
+        <Route path='/success'>
+          <Success />
         </Route>
         <Route path='/login'>{user ? <Redirect to='/' /> : <Login />}</Route>
         <Route path='/register'>
