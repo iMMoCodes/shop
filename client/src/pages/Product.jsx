@@ -1,6 +1,6 @@
 import { Add, Remove } from '@material-ui/icons'
 import styled from 'styled-components'
-import Announcement from '../Components/Announcement'
+import Announcement from '../Components/Announcement/Announcement'
 import Footer from '../Components/Footer'
 import Navbar from '../Components/Navbar'
 import Newsletter from '../Components/Newsletter'

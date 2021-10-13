@@ -43,7 +43,7 @@ export const categories = [
   },
 ]
 
-export const products = [
+export const fakeProducts = [
   {
     id: 1,
     img: 'https://images.pexels.com/photos/1461048/pexels-photo-1461048.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',

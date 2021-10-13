@@ -1,5 +1,5 @@
 import React from 'react'
-import Announcement from '../Components/Announcement'
+import Announcement from '../Components/Announcement/Announcement'
 import Categories from '../Components/Categories'
 import Footer from '../Components/Footer'
 import Navbar from '../Components/Navbar'
