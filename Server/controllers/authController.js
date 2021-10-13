@@ -3,7 +3,7 @@ const CryptoJS = require('crypto-js')
 const jwt = require('jsonwebtoken')
 
 // Register
-exports.registerUser = async (req, res) => {
+const registerUser = async (req, res) => {
   const newUser = new User({
     username: req.body.username,
     email: req.body.email,
@@ -25,7 +25,7 @@ exports.registerUser = async (req, res) => {
 }
 
 // Login
-exports.loginUser = async (req, res) => {
+const loginUser = async (req, res) => {
   try {
     const user = await User.findOne({ username: req.body.username })
     !user &&
@@ -53,4 +53,58 @@ exports.loginUser = async (req, res) => {
   } catch (err) {
     res.status(500).json({ status: 'error', err })
   }
+}
+
+// Verify token
+const verifyToken = (req, res, next) => {
+  const authHeader = req.headers.token
+  if (authHeader) {
+    const token = authHeader.split(' ')[1]
+    jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
+      if (err)
+        res
+          .status(403)
+          .json({ status: 'error', message: 'Token is not valid!' })
+      req.user = user
+      next()
+    })
+  } else {
+    return res
+      .status(401)
+      .json({ status: 'error', message: 'You are not authenticated!' })
+  }
+}
+
+// Verify and Authorization
+const verifyTokenAndAuthorize = (req, res, next) => {
+  verifyToken(req, res, () => {
+    if (req.user.id === req.params.id || req.user.isAdmin) {
+      next()
+    } else {
+      res
+        .status(403)
+        .json({ status: 'error', message: 'Action is not authorized!' })
+    }
+  })
+}
+
+// Verify and Admin
+const verifyTokenAndAdmin = (req, res, next) => {
+  verifyToken(req, res, () => {
+    if (req.user.isAdmin) {
+      next()
+    } else {
+      res
+        .status(403)
+        .json({ status: 'error', message: 'Action is not authorized!' })
+    }
+  })
+}
+
+module.exports = {
+  registerUser,
+  loginUser,
+  verifyToken,
+  verifyTokenAndAuthorize,
+  verifyTokenAndAdmin,
 }

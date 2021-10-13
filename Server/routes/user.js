@@ -1,14 +1,11 @@
 const router = require('express').Router()
+const authController = require('../controllers/authController')
+const userController = require('../controllers/userController')
 
-router.get('/usertest', (req, res) => {
-  res.send('test is successful')
-})
-
-router.post('/userposttest', (req, res) => {
-  const username = req.body.username
-  res.status(200).json({
-    status: 'success',
-  })
-})
+router.put(
+  '/:id',
+  authController.verifyTokenAndAuthorize,
+  userController.updateUser
+)
 
 module.exports = router
