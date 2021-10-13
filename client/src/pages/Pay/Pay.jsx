@@ -1,17 +1,8 @@
-import styled from 'styled-components'
 import StripeCheckout from 'react-stripe-checkout'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useHistory } from 'react-router'
-
-const Container = styled.div`
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`
-const Span = styled.span``
-const Button = styled.button``
+import { Container, Span, Button } from './PayStyles'
 
 const Pay = () => {
   const [stripeToken, setStripeToken] = useState(null)

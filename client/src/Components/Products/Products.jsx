@@ -1,15 +1,8 @@
 import { useEffect, useState } from 'react'
-import styled from 'styled-components'
-import { fakeProducts } from '../data'
-import Product from './Product'
+import { fakeProducts } from '../../data'
+import Product from '../Product/Product'
 import axios from 'axios'
-
-const Container = styled.div`
-  padding: 20px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-`
+import { Container } from './ProductsStyles'
 
 const Products = ({ category, filters, sort }) => {
   const [products, setProducts] = useState([])

@@ -1,12 +1,6 @@
-import {
-  FavoriteBorderOutlined,
-  SearchOutlined,
-  ShoppingCartOutlined,
-} from '@material-ui/icons'
-import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
-const Info = styled.div`
+export const Info = styled.div`
   opacity: 0;
   width: 100%;
   height: 100%;
@@ -21,7 +15,7 @@ const Info = styled.div`
   transition: all 0.5s ease;
 `
 
-const Container = styled.div`
+export const Container = styled.div`
   flex: 1;
   margin: 5px;
   min-width: 280px;
@@ -37,19 +31,19 @@ const Container = styled.div`
     border-radius: 20px;
   }
 `
-const Circle = styled.div`
+export const Circle = styled.div`
   width: 200px;
   height: 200px;
   border-radius: 50%;
   background-color: white;
   position: absolute;
 `
-const Image = styled.img`
+export const Image = styled.img`
   height: 75%;
   z-index: 2;
 `
 
-const Icon = styled.div`
+export const Icon = styled.div`
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -66,27 +60,3 @@ const Icon = styled.div`
     transform: scale(1.1);
   }
 `
-
-const Product = ({ item }) => {
-  return (
-    <Container>
-      <Circle />
-      <Image src={item.image} />
-      <Info>
-        <Icon>
-          <ShoppingCartOutlined />
-        </Icon>
-        <Icon>
-          <Link to={`/product/${item._id}`}>
-            <SearchOutlined />
-          </Link>
-        </Icon>
-        <Icon>
-          <FavoriteBorderOutlined />
-        </Icon>
-      </Info>
-    </Container>
-  )
-}
-
-export default Product

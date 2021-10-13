@@ -1,8 +1,7 @@
-import { Send } from '@material-ui/icons'
 import styled from 'styled-components'
-import { mobile, tablet } from '../responsive'
+import { mobile, tablet } from '../../responsive'
 
-const Container = styled.div`
+export const Container = styled.div`
   height: 60vh;
   background-color: #fcf5f5;
   display: flex;
@@ -12,18 +11,18 @@ const Container = styled.div`
   ${tablet({ height: '40vh' })}
   ${mobile({ height: '100%' })}
 `
-const Title = styled.h1`
+export const Title = styled.h1`
   font-size: 70px;
   margin-bottom: 20px;
   ${mobile({ textAlign: 'center', fontSize: '55px' })}
 `
-const Description = styled.p`
+export const Description = styled.p`
   font-size: 24px;
   font-weight: 300;
   margin-bottom: 20px;
   ${tablet({ textAlign: 'center' })}
 `
-const InputContainer = styled.div`
+export const InputContainer = styled.div`
   width: 50%;
   height: 40px;
   background-color: white;
@@ -33,35 +32,16 @@ const InputContainer = styled.div`
   border: 1px solid lightgray;
   ${mobile({ border: 'none', width: '80%' })}
 `
-const Input = styled.input`
+export const Input = styled.input`
   border: none;
   flex: 8;
   padding-left: 20px;
   height: 100%;
 `
-const Button = styled.button`
+export const Button = styled.button`
   flex: 1;
   border: none;
   background-color: teal;
   color: white;
   height: 100%;
 `
-
-const Newsletter = () => {
-  return (
-    <Container>
-      <Title>Newsletter</Title>
-      <Description>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus, dolores.
-      </Description>
-      <InputContainer>
-        <Input placeholder='example@email.com' />
-        <Button>
-          <Send />
-        </Button>
-      </InputContainer>
-    </Container>
-  )
-}
-
-export default Newsletter

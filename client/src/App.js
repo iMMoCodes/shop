@@ -4,14 +4,14 @@ import {
   Route,
   Redirect,
 } from 'react-router-dom'
-import Home from './pages/Home'
-import ProductList from './pages/ProductList'
-import Product from './pages/Product'
-import Register from './pages/Register'
-import Login from './pages/Login'
-import Cart from './pages/Cart'
-import Pay from './pages/Pay'
-import Success from './pages/Success'
+import Home from './pages/Home/Home'
+import ProductList from './pages/ProductList/ProductList'
+import Product from './pages/Product/Product'
+import Register from './pages/Register/Register'
+import Login from './pages/Login/Login'
+import Cart from './pages/Cart/Cart'
+import Pay from './pages/Pay/Pay'
+import Success from './pages/Success/Success'
 
 const App = () => {
   const user = true
