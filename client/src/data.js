@@ -27,16 +27,19 @@ export const categories = [
     id: 1,
     img: 'https://images.pexels.com/photos/1464625/pexels-photo-1464625.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
     title: 'Category 1',
+    cat: 'women',
   },
   {
     id: 2,
     img: 'https://images.pexels.com/photos/4458521/pexels-photo-4458521.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
     title: 'Category 2',
+    cat: 'shoes',
   },
   {
     id: 3,
     img: 'https://images.pexels.com/photos/3552358/pexels-photo-3552358.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
     title: 'Category 3',
+    cat: 'shirts',
   },
 ]
 

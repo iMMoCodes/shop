@@ -1,4 +1,9 @@
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from 'react-router-dom'
 import Home from './pages/Home'
 import ProductList from './pages/ProductList'
 import Product from './pages/Product'
@@ -9,14 +14,25 @@ import Pay from './pages/Pay'
 import Success from './pages/Success'
 
 const App = () => {
+  const user = true
   return (
     <Router>
       <Switch>
-        <Route path='/pay'>
-          <Pay />
+        <Route path='/' exact>
+          <Home />
         </Route>
-        <Route path='/success'>
-          <Success />
+        <Route path='/products/:category'>
+          <ProductList />
+        </Route>
+        <Route path='/product/:productId'>
+          <Product />
+        </Route>
+        <Route path='/cart'>
+          <Cart />
+        </Route>
+        <Route path='/login'>{user ? <Redirect to='/' /> : <Login />}</Route>
+        <Route path='/register'>
+          {user ? <Redirect to='/' /> : <Register />}
         </Route>
       </Switch>
     </Router>
