@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { NavLink } from '../../AppStyles'
 import { Container, User, Image, Button } from './UserListStyles'
 import { DataGrid } from '@mui/x-data-grid'
 import { DeleteOutline } from '@material-ui/icons'
@@ -44,9 +44,9 @@ const UserList = () => {
       renderCell: (params) => {
         return (
           <>
-            <Link to={`/user/${params.row.id}`}>
+            <NavLink to={`/user/${params.row.id}`}>
               <Button>Edit</Button>
-            </Link>
+            </NavLink>
             <DeleteOutline
               style={{ color: 'red', cursor: 'pointer' }}
               onClick={() => handleDelete(params.row.id)}

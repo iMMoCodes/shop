@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom'
 import {
   BarChart,
   ChatBubbleOutline,
@@ -21,6 +20,7 @@ import {
   Menu,
   Title,
 } from './SidebarStyles'
+import { NavLink } from '../../AppStyles'
 const Sidebar = () => {
   return (
     <Container>
@@ -28,12 +28,12 @@ const Sidebar = () => {
         <Menu>
           <Title>Dashboard</Title>
           <List>
-            <Link to='/' style={{ textDecoration: 'none', color: 'inherit' }}>
+            <NavLink to='/'>
               <ListItem>
                 <Home style={{ marginRight: '5px' }} />
                 Home
               </ListItem>
-            </Link>
+            </NavLink>
             <ListItem>
               <Timeline style={{ marginRight: '5px' }} />
               Analytics
@@ -47,24 +47,18 @@ const Sidebar = () => {
         <Menu>
           <Title>Quick Menu</Title>
           <List>
-            <Link
-              to='/users'
-              style={{ textDecoration: 'none', color: 'inherit' }}
-            >
+            <NavLink to='/users'>
               <ListItem>
                 <PersonOutline style={{ marginRight: '5px' }} />
                 Users
               </ListItem>
-            </Link>
-            <Link
-              to='/products'
-              style={{ textDecoration: 'none', color: 'inherit' }}
-            >
+            </NavLink>
+            <NavLink to='/products'>
               <ListItem>
                 <Storefront style={{ marginRight: '5px' }} />
                 Products
               </ListItem>
-            </Link>
+            </NavLink>
             <ListItem>
               <EuroSymbol style={{ marginRight: '5px' }} />
               Transactions

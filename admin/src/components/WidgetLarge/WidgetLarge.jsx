@@ -1,3 +1,6 @@
+import { useEffect, useState } from 'react'
+import { format } from 'timeago.js'
+import { userRequest } from '../../requestMethods'
 import {
   Container,
   Image,
@@ -14,6 +17,22 @@ import {
 } from './WidgetLargeStyles'
 
 const WidgetLarge = () => {
+  const [users, setUsers] = useState([])
+  const [orders, setOrders] = useState([])
+
+  useEffect(() => {
+    const getOrders = async () => {
+      try {
+        const res = await userRequest.get('/orders')
+        setOrders(res.data.orders)
+        console.log(orders)
+      } catch (err) {
+        console.log(err)
+      }
+    }
+    getOrders()
+  }, [])
+
   const Button = ({ type }) => {
     return <Btn txt={type}>{type}</Btn>
   }
@@ -31,39 +50,18 @@ const WidgetLarge = () => {
           </Tr>
         </thead>
         <tbody>
-          <Tr>
-            <User>
-              <Image src='./test-person.jpeg' alt='User' />
-              <Name>Test Person</Name>
-            </User>
-            <Date>10 Sep 2021</Date>
-            <Amount>122.00 €</Amount>
-            <Status>
-              <Button type='Approved'></Button>
-            </Status>
-          </Tr>
-          <Tr>
-            <User>
-              <Image src='./test-person.jpeg' alt='User' />
-              <Name>Test Person</Name>
-            </User>
-            <Date>10 Sep 2021</Date>
-            <Amount>122.00 €</Amount>
-            <Status>
-              <Button type='Declined'></Button>
-            </Status>
-          </Tr>
-          <Tr>
-            <User>
-              <Image src='./test-person.jpeg' alt='User' />
-              <Name>Test Person</Name>
-            </User>
-            <Date>10 Sep 2021</Date>
-            <Amount>122.00 €</Amount>
-            <Status>
-              <Button type='Pending'></Button>
-            </Status>
-          </Tr>
+          {orders.map((order) => (
+            <Tr>
+              <User>
+                <Name>{order.userId}</Name>
+              </User>
+              <Date>{format(order.createdAt)}</Date>
+              <Amount>{order.amount} €</Amount>
+              <Status>
+                <Button type={order.status}></Button>
+              </Status>
+            </Tr>
+          ))}
         </tbody>
       </Table>
     </Container>

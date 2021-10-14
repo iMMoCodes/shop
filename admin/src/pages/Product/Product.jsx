@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { NavLink } from '../../AppStyles'
 import { Publish } from '@material-ui/icons'
 import {
   AddButton,
@@ -35,12 +35,12 @@ const Product = () => {
     <Container>
       <TitleContainer>
         <Title>Product</Title>
-        <Link
+        <NavLink
           to='/createproduct'
           style={{ textDecoration: 'none', color: 'inherit' }}
         >
           <AddButton>Create</AddButton>
-        </Link>
+        </NavLink>
       </TitleContainer>
       <Top>
         <TopLeft>

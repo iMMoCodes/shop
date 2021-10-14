@@ -1,4 +1,4 @@
-import React from 'react'
+import { NavLink } from '../../AppStyles'
 import { Avatar, Badge } from '@material-ui/core'
 import { NotificationsNone, Language, Settings } from '@material-ui/icons'
 import {
@@ -13,9 +13,11 @@ const Topbar = () => {
   return (
     <Container>
       <Wrapper>
-        <Left>
-          <Span>ImmoStore Admin</Span>
-        </Left>
+        <NavLink to='/'>
+          <Left>
+            <Span>ImmoStore Admin</Span>
+          </Left>
+        </NavLink>
         <Right>
           <Avatar
             style={{ marginRight: '10px', cursor: 'pointer' }}

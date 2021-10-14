@@ -1,6 +1,6 @@
 import { Container, Product, Image, Button } from './ProductListStyles'
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { NavLink } from '../../AppStyles'
 import { DataGrid } from '@mui/x-data-grid'
 import { DeleteOutline } from '@material-ui/icons'
 import { productRows } from '../../data'
@@ -45,9 +45,9 @@ const ProductList = () => {
       renderCell: (params) => {
         return (
           <>
-            <Link to={`/product/${params.row.id}`}>
+            <NavLink to={`/product/${params.row.id}`}>
               <Button>Edit</Button>
-            </Link>
+            </NavLink>
             <DeleteOutline
               style={{ color: 'red', cursor: 'pointer' }}
               onClick={() => handleDelete(params.row.id)}

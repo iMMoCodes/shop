@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { NavLink } from '../../AppStyles'
 import {
   CalendarToday,
   LocationSearching,
@@ -43,9 +43,9 @@ const User = () => {
     <Container>
       <TitleContainer>
         <Title>Edit User</Title>
-        <Link to='/createuser'>
+        <NavLink to='/createuser'>
           <Button>Create</Button>
-        </Link>
+        </NavLink>
       </TitleContainer>
       <UserContainer>
         <Show>
