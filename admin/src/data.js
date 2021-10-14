@@ -131,3 +131,96 @@ export const userRows = [
     transaction: '120 €',
   },
 ]
+
+export const productRows = [
+  {
+    id: 1,
+    name: 'Product Title',
+    image:
+      'https://images.pexels.com/photos/7397170/pexels-photo-7397170.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
+    stock: 123,
+    status: 'active',
+    price: '120 €',
+  },
+  {
+    id: 2,
+    name: 'Product Title',
+    image:
+      'https://images.pexels.com/photos/7397170/pexels-photo-7397170.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
+    stock: 123,
+    status: 'active',
+    price: '120 €',
+  },
+  {
+    id: 3,
+    name: 'Product Title',
+    image:
+      'https://images.pexels.com/photos/7397170/pexels-photo-7397170.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
+    stock: 123,
+    status: 'active',
+    price: '120 €',
+  },
+  {
+    id: 4,
+    name: 'Product Title',
+    image:
+      'https://images.pexels.com/photos/7397170/pexels-photo-7397170.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
+    stock: 123,
+    status: 'active',
+    price: '120 €',
+  },
+  {
+    id: 5,
+    name: 'Product Title',
+    image:
+      'https://images.pexels.com/photos/7397170/pexels-photo-7397170.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
+    stock: 123,
+    status: 'active',
+    price: '120 €',
+  },
+  {
+    id: 6,
+    name: 'Product Title',
+    image:
+      'https://images.pexels.com/photos/7397170/pexels-photo-7397170.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
+    stock: 123,
+    status: 'active',
+    price: '120 €',
+  },
+  {
+    id: 7,
+    name: 'Product Title',
+    image:
+      'https://images.pexels.com/photos/7397170/pexels-photo-7397170.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
+    stock: 123,
+    status: 'active',
+    price: '120 €',
+  },
+  {
+    id: 8,
+    name: 'Product Title',
+    image:
+      'https://images.pexels.com/photos/7397170/pexels-photo-7397170.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
+    stock: 123,
+    status: 'active',
+    price: '120 €',
+  },
+  {
+    id: 9,
+    name: 'Product Title',
+    image:
+      'https://images.pexels.com/photos/7397170/pexels-photo-7397170.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
+    stock: 123,
+    status: 'active',
+    price: '120 €',
+  },
+  {
+    id: 10,
+    name: 'Product Title',
+    image:
+      'https://images.pexels.com/photos/7397170/pexels-photo-7397170.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
+    stock: 123,
+    status: 'active',
+    price: '120 €',
+  },
+]

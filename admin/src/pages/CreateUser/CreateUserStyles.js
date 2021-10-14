@@ -2,6 +2,7 @@ import styled from 'styled-components'
 
 export const Container = styled.div`
   flex: 4;
+  padding: 20px;
 `
 export const Title = styled.h1``
 export const Form = styled.form`

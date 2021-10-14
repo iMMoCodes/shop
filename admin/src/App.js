@@ -6,6 +6,7 @@ import Home from './pages/Home/Home'
 import UserList from './pages/UserList/UserList'
 import User from './pages/User/User'
 import CreateUser from './pages/CreateUser/CreateUser'
+import ProductList from './pages/ProductList/ProductList'
 
 function App() {
   return (
@@ -26,6 +27,15 @@ function App() {
           <Route path='/createuser'>
             <CreateUser />
           </Route>
+          <Route path='/products'>
+            <ProductList />
+          </Route>
+          {/* <Route path='/product/:productId'>
+            <User />
+          </Route>
+          <Route path='/createproduct'>
+            <CreateUser />
+          </Route> */}
         </Switch>
       </Container>
     </Router>
