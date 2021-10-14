@@ -1,4 +1,7 @@
 import { ArrowDownward, ArrowUpward } from '@material-ui/icons'
+import { useEffect } from 'react'
+import { useState } from 'react'
+import { userRequest } from '../../requestMethods'
 import {
   Container,
   Item,
@@ -10,17 +13,41 @@ import {
 } from './FeaturedInfoStyles'
 
 const FeaturedInfo = () => {
+  const [income, setIncome] = useState([])
+  const [percentage, setPercentage] = useState(0)
+
+  useEffect(() => {
+    const getIncome = async () => {
+      try {
+        const res = await userRequest.get('/orders/income')
+        setIncome(res.data.income)
+        setPercentage(
+          (res.data.income[1].total / res.data.income[0].total - 1) * 100
+        )
+      } catch (err) {
+        console.log(err)
+      }
+    }
+    getIncome()
+  }, [])
+
   return (
     <Container>
       <Item>
         <Title>Revenue</Title>
         <MoneyContainer>
-          <Money>3,655 €</Money>
+          <Money>{income[1]?.total} €</Money>
           <MoneyRate>
-            -13.5{' '}
-            <ArrowDownward
-              style={{ fontSize: '14px', marginLeft: '5px', color: 'red' }}
-            />
+            {Math.floor(percentage)} %
+            {percentage < 0 ? (
+              <ArrowDownward
+                style={{ fontSize: '14px', marginLeft: '5px', color: 'red' }}
+              />
+            ) : (
+              <ArrowUpward
+                style={{ fontSize: '14px', marginLeft: '5px', color: 'green' }}
+              />
+            )}
           </MoneyRate>
         </MoneyContainer>
         <SubTitle>Compared to last month</SubTitle>

@@ -3,7 +3,7 @@ import { format } from 'timeago.js'
 import { userRequest } from '../../requestMethods'
 import {
   Container,
-  Image,
+  // Image,
   Name,
   Table,
   User,
@@ -17,7 +17,6 @@ import {
 } from './WidgetLargeStyles'
 
 const WidgetLarge = () => {
-  const [users, setUsers] = useState([])
   const [orders, setOrders] = useState([])
 
   useEffect(() => {
@@ -25,7 +24,6 @@ const WidgetLarge = () => {
       try {
         const res = await userRequest.get('/orders')
         setOrders(res.data.orders)
-        console.log(orders)
       } catch (err) {
         console.log(err)
       }
@@ -51,7 +49,7 @@ const WidgetLarge = () => {
         </thead>
         <tbody>
           {orders.map((order) => (
-            <Tr>
+            <Tr key={order._id}>
               <User>
                 <Name>{order.userId}</Name>
               </User>
