@@ -1,7 +1,9 @@
-import Chart from '../../components/chart/Chart'
-import FeaturedInfo from '../../components/featuredInfo/FeaturedInfo'
-import { Container } from './HomeStyles'
+import Chart from '../../components/Chart/Chart'
+import FeaturedInfo from '../../components/FeaturedInfo/FeaturedInfo'
+import { Container, Widget } from './HomeStyles'
 import { userChartData } from '../../data'
+import WidgetSmall from '../../components/WidgetSmall/WidgetSmall'
+import WidgetLarge from '../../components/WidgetLarge/WidgetLarge'
 
 const Home = () => {
   return (
@@ -13,6 +15,10 @@ const Home = () => {
         grid
         dataKey='Active User'
       />
+      <Widget>
+        <WidgetSmall />
+        <WidgetLarge />
+      </Widget>
     </Container>
   )
 }
