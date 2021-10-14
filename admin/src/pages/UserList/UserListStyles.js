@@ -2,6 +2,7 @@ import styled from 'styled-components'
 
 export const Container = styled.div`
   flex: 4;
+  padding: 20px;
   /* width: calc(100vw - 200px); */
 `
 export const User = styled.div`

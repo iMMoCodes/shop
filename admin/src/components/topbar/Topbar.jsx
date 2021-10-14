@@ -20,7 +20,7 @@ const Topbar = () => {
           <Avatar
             style={{ marginRight: '10px', cursor: 'pointer' }}
             alt='Avatar'
-            src='./test-person.jpeg'
+            src='/test-person.jpeg'
           />
           <IconContainer>
             <Badge badgeContent={4} color='primary'>
