@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import {
   BarChart,
   ChatBubbleOutline,
@@ -27,10 +28,12 @@ const Sidebar = () => {
         <Menu>
           <Title>Dashboard</Title>
           <List>
-            <ListItem>
-              <Home style={{ marginRight: '5px' }} />
-              Home
-            </ListItem>
+            <Link to='/' style={{ textDecoration: 'none', color: 'inherit' }}>
+              <ListItem>
+                <Home style={{ marginRight: '5px' }} />
+                Home
+              </ListItem>
+            </Link>
             <ListItem>
               <Timeline style={{ marginRight: '5px' }} />
               Analytics
@@ -44,14 +47,24 @@ const Sidebar = () => {
         <Menu>
           <Title>Quick Menu</Title>
           <List>
-            <ListItem>
-              <PersonOutline style={{ marginRight: '5px' }} />
-              Users
-            </ListItem>
-            <ListItem>
-              <Storefront style={{ marginRight: '5px' }} />
-              Products
-            </ListItem>
+            <Link
+              to='/users'
+              style={{ textDecoration: 'none', color: 'inherit' }}
+            >
+              <ListItem>
+                <PersonOutline style={{ marginRight: '5px' }} />
+                Users
+              </ListItem>
+            </Link>
+            <Link
+              to='/products'
+              style={{ textDecoration: 'none', color: 'inherit' }}
+            >
+              <ListItem>
+                <Storefront style={{ marginRight: '5px' }} />
+                Products
+              </ListItem>
+            </Link>
             <ListItem>
               <EuroSymbol style={{ marginRight: '5px' }} />
               Transactions

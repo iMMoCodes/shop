@@ -43,7 +43,7 @@ const User = () => {
     <Container>
       <TitleContainer>
         <Title>Edit User</Title>
-        <Link to='/newuser'>
+        <Link to='/createuser'>
           <Button>Create</Button>
         </Link>
       </TitleContainer>
@@ -77,7 +77,7 @@ const User = () => {
             </UserInfo>
             <UserInfo>
               <LocationSearching style={{ fontSize: '16px' }} />
-              <InfoTitle>Tampere, Finland</InfoTitle>
+              <InfoTitle>Location | Place</InfoTitle>
             </UserInfo>
           </Bottom>
         </Show>

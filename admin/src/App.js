@@ -5,6 +5,7 @@ import Sidebar from './components/Sidebar/Sidebar'
 import Home from './pages/Home/Home'
 import UserList from './pages/UserList/UserList'
 import User from './pages/User/User'
+import CreateUser from './pages/CreateUser/CreateUser'
 
 function App() {
   return (
@@ -21,6 +22,9 @@ function App() {
           </Route>
           <Route path='/user/:userId'>
             <User />
+          </Route>
+          <Route path='/createuser'>
+            <CreateUser />
           </Route>
         </Switch>
       </Container>
