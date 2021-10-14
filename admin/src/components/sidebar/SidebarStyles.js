@@ -1,11 +1,13 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
-  flex: 1;
   height: calc(100vh - 50px);
-  background-color: rgb(251, 251, 255);
+  /* width: 200px; */
+  flex: 1;
+  background-color: #f3f3f3;
   position: sticky;
   top: 50px;
+  left: 0;
 `
 export const Wrapper = styled.div`
   padding: 20px;

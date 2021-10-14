@@ -1,22 +1,26 @@
-import Sidebar from './components/sidebar/Sidebar'
-import Topbar from './components/topbar/Topbar'
-import styled from 'styled-components'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { Container } from './AppStyles'
+import Topbar from './components/Topbar/Topbar'
+import Sidebar from './components/Sidebar/Sidebar'
 import Home from './pages/Home/Home'
-
-const Container = styled.div`
-  display: flex;
-  margin-top: 10px;
-`
+import UserList from './pages/UserList/UserList'
 
 function App() {
   return (
-    <>
+    <Router>
       <Topbar />
       <Container>
         <Sidebar />
-        <Home />
+        <Switch>
+          <Route path='/' exact>
+            <Home />
+          </Route>
+          <Route path='/users' exact>
+            <UserList />
+          </Route>
+        </Switch>
       </Container>
-    </>
+    </Router>
   )
 }
 
