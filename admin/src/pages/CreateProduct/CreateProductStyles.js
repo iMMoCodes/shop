@@ -8,6 +8,7 @@ export const Title = styled.h1``
 export const Form = styled.form`
   display: flex;
   flex-wrap: wrap;
+  flex-direction: column;
 `
 export const Item = styled.div`
   width: 450px;
@@ -22,27 +23,6 @@ export const Label = styled.label`
   font-weight: 600;
   color: rgb(150, 150, 150);
 `
-export const Input = styled.input`
-  height: 20px;
-  padding: 10px;
-  border: 1px solid gray;
-  border-radius: 5px;
-`
-export const Gender = styled.div`
-  margin-top: 15px;
-  display: flex;
-  align-items: center;
-`
-export const RadioLabel = styled.label`
-  margin: 0px 10px;
-  font-size: 18px;
-  color: #555;
-`
-export const Select = styled.select`
-  height: 40px;
-  border-radius: 5px;
-`
-export const Option = styled.option``
 export const UploadLabel = styled.label`
   display: flex;
   align-items: center;
@@ -54,6 +34,17 @@ export const UploadLabel = styled.label`
   border-radius: 7px;
   cursor: pointer;
 `
+export const Input = styled.input`
+  height: 20px;
+  padding: 10px;
+  border: 1px solid gray;
+  border-radius: 5px;
+`
+export const Select = styled.select`
+  height: 40px;
+  border-radius: 5px;
+`
+export const Option = styled.option``
 export const Button = styled.button`
   width: 200px;
   max-height: 40px;

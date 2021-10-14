@@ -1,3 +1,4 @@
+import { Publish } from '@material-ui/icons'
 import {
   Button,
   Container,
@@ -10,6 +11,7 @@ import {
   RadioLabel,
   Select,
   Title,
+  UploadLabel,
 } from './CreateUserStyles'
 
 const CreateUser = () => {
@@ -56,6 +58,14 @@ const CreateUser = () => {
             <Option value='yes'>Yes</Option>
             <Option value='no'>No</Option>
           </Select>
+        </Item>
+        <Item>
+          <Label>Image</Label>
+          <UploadLabel for='file'>
+            <Publish style={{ marginLeft: '4px', fontSize: '22px' }} />
+            &nbsp;Upload Image
+          </UploadLabel>
+          <Input type='file' id='file' style={{ display: 'none' }} />
         </Item>
         <Button>Create</Button>
       </Form>
