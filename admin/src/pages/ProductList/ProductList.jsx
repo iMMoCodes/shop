@@ -1,19 +1,25 @@
-import { Container, Product, Image, Button } from './ProductListStyles'
-import { useState } from 'react'
-import { NavLink } from '../../AppStyles'
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { DataGrid } from '@mui/x-data-grid'
+import { Container, Product, Image, Button } from './ProductListStyles'
+import { NavLink } from '../../AppStyles'
 import { DeleteOutline } from '@material-ui/icons'
-import { productRows } from '../../data'
+import { deleteProduct, getProducts } from '../../redux/apiCalls'
 
 const ProductList = () => {
-  const [data, setData] = useState(productRows)
+  const dispatch = useDispatch()
+  const products = useSelector((state) => state.product.products.products)
+
+  useEffect(() => {
+    getProducts(dispatch)
+  }, [dispatch])
 
   const handleDelete = (id) => {
-    setData(data.filter((item) => item.id !== id))
+    deleteProduct(id, dispatch)
   }
 
   const columns = [
-    { field: 'id', headerName: 'ID', width: 90 },
+    { field: '_id', headerName: 'ID', width: 230 },
     {
       field: 'product',
       headerName: 'Product',
@@ -22,21 +28,16 @@ const ProductList = () => {
         return (
           <Product>
             <Image src={params.row.image} alt='Product' />
-            {params.row.name}
+            {params.row.title}
           </Product>
         )
       },
     },
-    { field: 'stock', headerName: 'Stock', width: 200 },
-    {
-      field: 'status',
-      headerName: 'Status',
-      width: 160,
-    },
+    { field: 'inStock', headerName: 'In Stock', width: 140 },
     {
       field: 'price',
-      headerName: 'Price',
-      width: 170,
+      headerName: 'Price (€)',
+      width: 140,
     },
     {
       field: 'action',
@@ -45,12 +46,12 @@ const ProductList = () => {
       renderCell: (params) => {
         return (
           <>
-            <NavLink to={`/product/${params.row.id}`}>
+            <NavLink to={`/product/${params.row._id}`}>
               <Button>Edit</Button>
             </NavLink>
             <DeleteOutline
               style={{ color: 'red', cursor: 'pointer' }}
-              onClick={() => handleDelete(params.row.id)}
+              onClick={() => handleDelete(params.row._id)}
             />
           </>
         )
@@ -61,9 +62,10 @@ const ProductList = () => {
   return (
     <Container>
       <DataGrid
-        rows={data}
+        rows={products}
         disableSelectionOnClick
         columns={columns}
+        getRowId={(row) => row._id}
         pageSize={8}
         checkboxSelection
       />
