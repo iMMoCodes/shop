@@ -1,6 +1,7 @@
 import { ArrowLeftOutlined, ArrowRightOutlined } from '@material-ui/icons'
 import { useState } from 'react'
 import { sliderItems } from '../../data'
+import { NavLink } from '../../AppStyles'
 import {
   Container,
   Arrow,
@@ -38,7 +39,9 @@ const Slider = () => {
             <InfoContainer>
               <Title>{item.title}</Title>
               <Description>{item.desc}</Description>
-              <Button>SHOW NOW</Button>
+              <NavLink to={item.link}>
+                <Button>SHOW NOW</Button>
+              </NavLink>
             </InfoContainer>
           </Slide>
         ))}

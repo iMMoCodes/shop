@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { tablet } from '../../responsive'
+import { laptop } from '../../responsive'
 
 export const Container = styled.div`
   width: 100%;
@@ -7,7 +7,7 @@ export const Container = styled.div`
   display: flex;
   position: relative;
   overflow: hidden;
-  ${tablet({ display: 'none' })}
+  ${laptop({ display: 'none' })}
 `
 
 export const Arrow = styled.div`
@@ -41,7 +41,7 @@ export const Slide = styled.div`
   height: 100vh;
   display: flex;
   align-items: center;
-  background-color: #${(props) => props.bg};
+  background-color: ${(props) => props.bg};
 `
 export const ImageContainer = styled.div`
   height: 100%;
@@ -50,6 +50,8 @@ export const ImageContainer = styled.div`
 
 export const Image = styled.img`
   height: 80%;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
 `
 
 export const InfoContainer = styled.div`
@@ -71,4 +73,5 @@ export const Button = styled.button`
   font-size: 20px;
   background-color: transparent;
   cursor: pointer;
+  border-radius: 7px;
 `

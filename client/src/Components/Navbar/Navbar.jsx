@@ -33,8 +33,12 @@ const Navbar = () => {
           </NavLink>
         </Center>
         <Right>
-          <MenuItem>REGISTER</MenuItem>
-          <MenuItem>SIGN IN</MenuItem>
+          <NavLink to='/register'>
+            <MenuItem>REGISTER</MenuItem>
+          </NavLink>
+          <NavLink to='/login'>
+            <MenuItem>SIGN IN</MenuItem>
+          </NavLink>
           <NavLink to='/cart'>
             <MenuItem>
               <Badge badgeContent={quantity} color='primary'>

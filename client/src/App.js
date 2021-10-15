@@ -12,6 +12,7 @@ import Register from './pages/Register/Register'
 import Login from './pages/Login/Login'
 import Cart from './pages/Cart/Cart'
 import Success from './pages/Success/Success'
+import Popup from './Components/Popup/Popup'
 
 const App = () => {
   const user = useSelector((state) => state.user.currentUser)
