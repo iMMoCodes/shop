@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { NavLink } from '../../AppStyles'
 import { useSelector } from 'react-redux'
 import { Search, ShoppingCartOutlined } from '@material-ui/icons'
 import { Badge } from '@material-ui/core'
@@ -28,18 +28,20 @@ const Navbar = () => {
           </SearchContainer>
         </Left>
         <Center>
-          <Logo>ImmoStore</Logo>
+          <NavLink to='/'>
+            <Logo>ImmoStore</Logo>
+          </NavLink>
         </Center>
         <Right>
           <MenuItem>REGISTER</MenuItem>
           <MenuItem>SIGN IN</MenuItem>
-          <Link to='/cart'>
+          <NavLink to='/cart'>
             <MenuItem>
               <Badge badgeContent={quantity} color='primary'>
                 <ShoppingCartOutlined />
               </Badge>
             </MenuItem>
-          </Link>
+          </NavLink>
         </Right>
       </Wrapper>
     </Container>

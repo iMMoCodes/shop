@@ -32,7 +32,6 @@ import {
   UploadImage,
 } from './ProductStyles'
 import Chart from '../../components/Chart/Chart'
-import { productChartData } from '../../data'
 
 const Product = () => {
   const location = useLocation()

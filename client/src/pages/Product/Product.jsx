@@ -42,7 +42,7 @@ const Product = () => {
     const getProduct = async () => {
       try {
         const res = await publicRequest.get(`/products/find/${id}`)
-        setProduct(res.data.product)
+        setProduct(res.data)
       } catch (err) {
         console.log(err)
       }

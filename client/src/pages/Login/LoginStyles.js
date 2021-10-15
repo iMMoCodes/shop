@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import { tablet } from '../../responsive'
+import { Link } from 'react-router-dom'
 
 export const Container = styled.div`
   width: 100vw;
@@ -43,7 +44,7 @@ export const Button = styled.button`
     cursor: not-allowed;
   }
 `
-export const Link = styled.a`
+export const LoginLink = styled(Link)`
   margin: 5px 0px;
   font-size: 12px;
   text-decoration: underline;

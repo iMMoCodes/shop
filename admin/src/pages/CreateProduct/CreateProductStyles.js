@@ -23,17 +23,6 @@ export const Label = styled.label`
   font-weight: 600;
   color: rgb(150, 150, 150);
 `
-export const UploadLabel = styled.label`
-  display: flex;
-  align-items: center;
-  font-size: 14px;
-  margin-bottom: 10px;
-  height: 40px;
-  color: rgb(117, 117, 117);
-  border: 1px solid rgb(150, 150, 150);
-  border-radius: 7px;
-  cursor: pointer;
-`
 export const Input = styled.input`
   height: 20px;
   padding: 10px;

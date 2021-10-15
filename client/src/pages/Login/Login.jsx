@@ -8,7 +8,7 @@ import {
   Form,
   Input,
   Button,
-  Link,
+  LoginLink,
   Error,
 } from './LoginStyles'
 
@@ -41,8 +41,8 @@ const Login = () => {
             Login
           </Button>
           {error && <Error>Something went wrong...</Error>}
-          <Link>Forgot password?</Link>
-          <Link>Create new Account</Link>
+          <LoginLink>Forgot password?</LoginLink>
+          <LoginLink>Create new Account</LoginLink>
         </Form>
       </Wrapper>
     </Container>

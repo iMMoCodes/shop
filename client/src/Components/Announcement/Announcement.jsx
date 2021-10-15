@@ -1,7 +1,7 @@
 import { Container } from './AnnouncementStyles'
 
 const Announcement = () => {
-  return <Container>Super Deal! Free shipping on orders over 50€</Container>
+  return <Container>Here is a really cool banner!</Container>
 }
 
 export default Announcement

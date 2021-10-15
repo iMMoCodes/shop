@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import { fakeProducts } from '../../data'
 import Product from '../Product/Product'
 import axios from 'axios'
 import { Container } from './ProductsStyles'
@@ -16,7 +15,7 @@ const Products = ({ category, filters, sort }) => {
             ? `http://localhost:5000/api/v1/products?category=${category}`
             : `http://localhost:5000/api/v1/products`
         )
-        setProducts(res.data.products)
+        setProducts(res.data)
       } catch (err) {
         console.log(err)
       }
