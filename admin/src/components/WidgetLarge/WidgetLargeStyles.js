@@ -44,15 +44,15 @@ export const Btn = styled.button`
   border: none;
   border-radius: 10px;
   background-color: ${(props) =>
-    props.txt === 'Approved'
+    props.txt === 'approved'
       ? '#e5faf2'
-      : props.txt === 'Declined'
+      : props.txt === 'declined'
       ? '#fff0f1'
       : '#ebf1fe'};
   color: ${(props) =>
-    props.txt === 'Approved'
+    props.txt === 'approved'
       ? '#3bb077'
-      : props.txt === 'Declined'
+      : props.txt === 'declined'
       ? '#d95087'
       : '#2a7ade'};
 `

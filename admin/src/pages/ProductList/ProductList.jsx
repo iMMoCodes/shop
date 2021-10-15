@@ -8,7 +8,7 @@ import { deleteProduct, getProducts } from '../../redux/apiCalls'
 
 const ProductList = () => {
   const dispatch = useDispatch()
-  const products = useSelector((state) => state.product.products.products)
+  const products = useSelector((state) => state.product.products)
 
   useEffect(() => {
     getProducts(dispatch)

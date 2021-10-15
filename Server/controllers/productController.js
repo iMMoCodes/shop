@@ -6,7 +6,7 @@ const createProduct = async (req, res) => {
 
   try {
     const savedProduct = await newProduct.save()
-    res.status(201).json({ status: 'success', savedProduct })
+    res.status(201).json(savedProduct)
   } catch (err) {
     res.status(500).json({ status: 'error', err })
   }
@@ -22,7 +22,7 @@ const updateProduct = async (req, res) => {
       },
       { new: true }
     )
-    res.status(200).json({ status: 'success', updatedProduct })
+    res.status(200).json(updatedProduct)
   } catch (err) {
     res.status(500).json({ status: 'error', err })
   }
@@ -44,9 +44,9 @@ const deleteProduct = async (req, res) => {
 const getProduct = async (req, res) => {
   try {
     const product = await Product.findById(req.params.id)
-    res.status(200).json({ status: 'success', product })
+    res.status(200).json(product)
   } catch (err) {
-    res.status(500).json({ status: 'error', err })
+    res.status(500).json(err)
   }
 }
 
@@ -67,9 +67,9 @@ const getAllProducts = async (req, res) => {
     } else {
       products = await Product.find()
     }
-    res.status(200).json({ status: 'success', products })
+    res.status(200).json(products)
   } catch (err) {
-    res.status(500).json({ status: 'error', err })
+    res.status(500).json(err)
   }
 }
 

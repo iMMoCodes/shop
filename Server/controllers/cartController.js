@@ -5,7 +5,7 @@ const createCart = async (req, res) => {
   const newCart = new Cart(req.body)
   try {
     const savedCart = await newCart.save()
-    res.status(201).json({ status: 'success', savedCart })
+    res.status(201).json(savedCart)
   } catch (err) {
     res.status(500).json({ status: 'error', err })
   }
@@ -21,7 +21,7 @@ const updateCart = async (req, res) => {
       },
       { new: true }
     )
-    res.status(200).json({ status: 'success', updatedCart })
+    res.status(200).json(updatedCart)
   } catch (err) {
     res.status(500).json({ status: 'error', err })
   }
@@ -43,7 +43,7 @@ const deleteCart = async (req, res) => {
 const getUserCart = async (req, res) => {
   try {
     const cart = await Cart.findOne({ userId: req.params.userId })
-    res.status(200).json({ status: 'success', cart })
+    res.status(200).json(cart)
   } catch (err) {
     res.status(500).json({ status: 'error', err })
   }
@@ -53,7 +53,7 @@ const getUserCart = async (req, res) => {
 const getAllCarts = async (req, res) => {
   try {
     const carts = await Cart.find()
-    res.status(200).json({ status: 'success', carts })
+    res.status(200).json(carts)
   } catch (err) {
     res.status(500).json({ status: 'error', err })
   }

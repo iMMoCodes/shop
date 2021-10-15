@@ -28,10 +28,8 @@ export const productSlice = createSlice({
     },
     deleteProductSuccess: (state, action) => {
       state.pending = false
-      state.products.products.splice(
-        state.products.products.findIndex(
-          (item) => item._id === action.payload
-        ),
+      state.products.splice(
+        state.products.findIndex((item) => item._id === action.payload),
         1
       )
     },

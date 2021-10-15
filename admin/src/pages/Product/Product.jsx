@@ -1,3 +1,7 @@
+import { useLocation } from 'react-router'
+import { useSelector } from 'react-redux'
+import { useState, useEffect, useMemo } from 'react'
+import { userRequest } from '../../requestMethods'
 import { NavLink } from '../../AppStyles'
 import { Publish } from '@material-ui/icons'
 import {
@@ -31,6 +35,49 @@ import Chart from '../../components/Chart/Chart'
 import { productChartData } from '../../data'
 
 const Product = () => {
+  const location = useLocation()
+  const productId = location.pathname.split('/')[2]
+  const [productStats, setProductStats] = useState([])
+
+  const product = useSelector((state) =>
+    state.product.products.find((product) => product._id === productId)
+  )
+
+  const MONTHS = useMemo(
+    () => [
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
+      'May',
+      'Jun',
+      'Jul',
+      'Aug',
+      'Sep',
+      'Oct',
+      'Nov',
+      'Dec',
+    ],
+    []
+  )
+
+  useEffect(() => {
+    const getStats = async () => {
+      try {
+        const res = await userRequest.get(`/orders/income?pid=${productId}`)
+        res.data.map((item) =>
+          setProductStats((prev) => [
+            ...prev,
+            { name: MONTHS[item._id - 1], Sales: item.total },
+          ])
+        )
+      } catch (err) {
+        console.log(err)
+      }
+    }
+    getStats()
+  }, [productId, MONTHS])
+
   return (
     <Container>
       <TitleContainer>
@@ -45,35 +92,28 @@ const Product = () => {
       <Top>
         <TopLeft>
           <Chart
-            data={productChartData}
+            data={productStats}
             dataKey='Sales'
             title='Sales Performance'
           />
         </TopLeft>
         <TopRight>
           <InfoTop>
-            <Image
-              src='https://images.pexels.com/photos/7397170/pexels-photo-7397170.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'
-              alt='product'
-            />
-            <Name>Product name</Name>
+            <Image src={product.image} alt='product' />
+            <Name>{product.title}</Name>
           </InfoTop>
           <InfoBottom>
             <InfoItem>
-              <InfoKey>id:</InfoKey>
-              <InfoValue>123</InfoValue>
+              <InfoKey>Id:</InfoKey>
+              <InfoValue>{product._id}</InfoValue>
             </InfoItem>
             <InfoItem>
-              <InfoKey>sales:</InfoKey>
+              <InfoKey>Sales:</InfoKey>
               <InfoValue>4238</InfoValue>
             </InfoItem>
             <InfoItem>
-              <InfoKey>active:</InfoKey>
-              <InfoValue>yes</InfoValue>
-            </InfoItem>
-            <InfoItem>
-              <InfoKey>in stock:</InfoKey>
-              <InfoValue>no</InfoValue>
+              <InfoKey>In stock:</InfoKey>
+              <InfoValue>{product.inStock ? 'Yes' : 'No'}</InfoValue>
             </InfoItem>
           </InfoBottom>
         </TopRight>
@@ -81,26 +121,22 @@ const Product = () => {
       <Bottom>
         <Form>
           <FormLeft>
-            <Label>Product Name</Label>
-            <Input type='text' placeholder='Product' />
+            <Label>Title</Label>
+            <Input type='text' placeholder={product.title} />
+            <Label>Description</Label>
+            <Input type='text' placeholder={product.desc} />
+            <Label>Price</Label>
+            <Input type='text' placeholder={product.price} />
             <Label>In Stock</Label>
             <Select name='inStock' id='idStock'>
-              <Option value='yes'>Yes</Option>
-              <Option value='no'>No</Option>
-            </Select>
-            <Label>Active</Label>
-            <Select name='active' id='active'>
-              <Option value='yes'>Yes</Option>
-              <Option value='no'>No</Option>
+              <Option value='true'>Yes</Option>
+              <Option value='false'>No</Option>
             </Select>
           </FormLeft>
           <FormRight>
             <Upload>
-              <UploadImage
-                src='https://images.pexels.com/photos/7397170/pexels-photo-7397170.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'
-                alt='product'
-              />
-              <Label for='file'>
+              <UploadImage src={product.image} alt='product' />
+              <Label htmlFor='file'>
                 <Publish />
               </Label>
               <Input type='file' id='file' style={{ display: 'none' }} />

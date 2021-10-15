@@ -18,7 +18,7 @@ const updateUser = async (req, res) => {
       { new: true }
     )
     const { password, ...others } = updatedUser._doc
-    res.status(200).json({ status: 'success', ...others })
+    res.status(200).json(...others)
   } catch (err) {
     res.status(500).json({ status: 'error', err })
   }
@@ -41,7 +41,7 @@ const getUser = async (req, res) => {
   try {
     const user = await User.findById(req.params.id)
     const { password, ...others } = user._doc
-    res.status(200).json({ status: 'success', ...others })
+    res.status(200).json(...others)
   } catch (err) {
     res.status(500).json({ status: 'error', err })
   }
@@ -54,7 +54,7 @@ const getAllUsers = async (req, res) => {
     const users = query
       ? await User.find().sort({ _id: -1 }).limit(5)
       : await User.find()
-    res.status(200).json({ status: 'success', users })
+    res.status(200).json(users)
   } catch (err) {
     res.status(500).json({ status: 'error', err })
   }
@@ -80,7 +80,7 @@ const getUserStats = async (req, res) => {
         },
       },
     ])
-    res.status(200).json({ status: 'success', data })
+    res.status(200).json(data)
   } catch (err) {
     res.status(500).json({ status: 'error', err })
   }

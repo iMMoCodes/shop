@@ -20,10 +20,8 @@ const FeaturedInfo = () => {
     const getIncome = async () => {
       try {
         const res = await userRequest.get('/orders/income')
-        setIncome(res.data.income)
-        setPercentage(
-          (res.data.income[1].total / res.data.income[0].total - 1) * 100
-        )
+        setIncome(res.data)
+        setPercentage((res.data[1].total / res.data[0].total - 1) * 100)
       } catch (err) {
         console.log(err)
       }

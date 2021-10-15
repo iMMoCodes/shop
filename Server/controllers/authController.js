@@ -15,10 +15,7 @@ const registerUser = async (req, res) => {
 
   try {
     const savedUser = await newUser.save()
-    res.status(201).json({
-      status: 'success',
-      savedUser,
-    })
+    res.status(201).json(savedUser)
   } catch (err) {
     res.status(500).json({ status: 'error', err })
   }
@@ -49,7 +46,7 @@ const loginUser = async (req, res) => {
     )
     const { password, ...others } = user._doc
 
-    res.status(200).json({ status: 'success', ...others, accessToken })
+    res.status(200).json(...others, accessToken)
   } catch (err) {
     res.status(500).json({ status: 'error', err })
   }

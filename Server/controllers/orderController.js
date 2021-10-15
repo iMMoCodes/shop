@@ -5,9 +5,9 @@ const createOrder = async (req, res) => {
   const newOrder = new Order(req.body)
   try {
     const savedOrder = await newOrder.save()
-    res.status(201).json({ status: 'success', savedOrder })
+    res.status(201).json(savedOrder)
   } catch (err) {
-    res.status(500).json({ status: 'error', err })
+    res.status(500).json(err)
   }
 }
 
@@ -21,7 +21,7 @@ const updateOrder = async (req, res) => {
       },
       { new: true }
     )
-    res.status(200).json({ status: 'success', updatedOrder })
+    res.status(200).json(updatedOrder)
   } catch (err) {
     res.status(500).json({ status: 'error', err })
   }
@@ -43,7 +43,7 @@ const deleteOrder = async (req, res) => {
 const getUserOrders = async (req, res) => {
   try {
     const orders = await Order.find({ userId: req.params.userId })
-    res.status(200).json({ status: 'success', orders })
+    res.status(200).json(orders)
   } catch (err) {
     res.status(500).json({ status: 'error', err })
   }
@@ -53,7 +53,7 @@ const getUserOrders = async (req, res) => {
 const getAllOrders = async (req, res) => {
   try {
     const orders = await Order.find()
-    res.status(200).json({ status: 'success', orders })
+    res.status(200).json(orders)
   } catch (err) {
     res.status(500).json({ status: 'error', err })
   }
@@ -61,13 +61,21 @@ const getAllOrders = async (req, res) => {
 
 // Get Monthly Income
 const getMonthlyIncome = async (req, res) => {
+  const productId = req.query.pid
   const date = new Date()
   const lastMonth = new Date(date.setMonth(date.getMonth() - 1))
   const previousMonth = new Date(new Date().setMonth(lastMonth.getMonth() - 1))
 
   try {
     const income = await Order.aggregate([
-      { $match: { createdAt: { $gte: previousMonth } } },
+      {
+        $match: {
+          createdAt: { $gte: previousMonth },
+          ...(productId && {
+            products: { $elemMatch: { productId } },
+          }),
+        },
+      },
       {
         $project: {
           month: { $month: '$createdAt' },
@@ -81,7 +89,7 @@ const getMonthlyIncome = async (req, res) => {
         },
       },
     ])
-    res.status(200).json({ status: 'success', income })
+    res.status(200).json(income)
   } catch (err) {
     res.status(500).json({ status: 'error', err })
   }

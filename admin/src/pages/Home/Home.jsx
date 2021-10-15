@@ -31,7 +31,7 @@ const Home = () => {
     const getStats = async () => {
       try {
         const res = await userRequest.get('/users/stats')
-        res.data.data.map((item) =>
+        res.data.map((item) =>
           setUserStats((prev) => [
             ...prev,
             { name: MONTHS[item._id - 1], 'Active User': item.total },

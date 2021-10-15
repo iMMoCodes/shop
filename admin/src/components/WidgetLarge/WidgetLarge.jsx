@@ -23,7 +23,7 @@ const WidgetLarge = () => {
     const getOrders = async () => {
       try {
         const res = await userRequest.get('/orders')
-        setOrders(res.data.orders)
+        setOrders(res.data)
       } catch (err) {
         console.log(err)
       }

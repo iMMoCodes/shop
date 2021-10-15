@@ -19,7 +19,7 @@ const WidgetSmall = () => {
     const getUsers = async () => {
       try {
         const res = await userRequest.get('/users/?new=true')
-        setUsers(res.data.users)
+        setUsers(res.data)
       } catch (err) {
         console.log(err)
       }
