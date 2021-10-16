@@ -1,14 +1,14 @@
 import { NavLink } from '../../AppStyles'
 import { useSelector } from 'react-redux'
-import { Search, ShoppingCartOutlined } from '@material-ui/icons'
+import { ShoppingCartOutlined } from '@material-ui/icons'
 import { Badge } from '@material-ui/core'
+import { SearchModal } from '../SearchModal/SearchModal'
 import {
   Container,
   Wrapper,
   Left,
   Language,
   SearchContainer,
-  Input,
   Center,
   Logo,
   Right,
@@ -17,14 +17,14 @@ import {
 
 const Navbar = () => {
   const quantity = useSelector((state) => state.cart.quantity)
+
   return (
     <Container>
       <Wrapper>
         <Left>
           <Language>EN</Language>
           <SearchContainer>
-            <Input placeholder='Search...' type='search' name='search' />
-            <Search style={{ color: 'gray', fontSize: 16 }} />
+            <SearchModal style={{ color: 'gray', fontSize: 18 }} />
           </SearchContainer>
         </Left>
         <Center>

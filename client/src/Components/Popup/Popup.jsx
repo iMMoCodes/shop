@@ -60,7 +60,7 @@ export const BasicModal = ({ item }) => {
   }
 
   return (
-    <div>
+    <>
       <ShoppingCartOutlined onClick={handleOpen} />
       <Modal
         open={open}
@@ -101,6 +101,6 @@ export const BasicModal = ({ item }) => {
           </AddContainer>
         </Box>
       </Modal>
-    </div>
+    </>
   )
 }

@@ -30,6 +30,8 @@ export const SearchContainer = styled.div`
   display: flex;
   align-items: center;
   margin-left: 25px;
+  border-radius: 20px;
+  cursor: pointer;
   padding: 5px;
 `
 
