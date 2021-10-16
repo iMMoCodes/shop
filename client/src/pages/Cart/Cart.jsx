@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { useHistory } from 'react-router'
+import { NavLink } from '../../AppStyles'
+import { updateProduct, deleteProduct, deleteCart } from '../../redux/cartRedux'
 import StripeCheckout from 'react-stripe-checkout'
 import { userRequest } from '../../requestMethods'
 import { Add, Remove } from '@material-ui/icons'
@@ -42,6 +44,27 @@ const Cart = () => {
   const cart = useSelector((state) => state.cart)
   const [stripeToken, setStripeToken] = useState(null)
   const history = useHistory()
+  const dispatch = useDispatch()
+
+  const handleClick = (type, product) => {
+    if (type === 'dec' && product.quantity === 1) {
+      dispatch(
+        deleteProduct({ id: product._id, quantity: -1, price: product.price })
+      )
+    } else if (type === 'dec') {
+      dispatch(
+        updateProduct({ id: product._id, quantity: -1, price: product.price })
+      )
+    } else {
+      dispatch(
+        updateProduct({ id: product._id, quantity: 1, price: product.price })
+      )
+    }
+  }
+
+  const clearCart = () => {
+    dispatch(deleteCart())
+  }
 
   const onToken = (token) => {
     setStripeToken(token)
@@ -68,17 +91,21 @@ const Cart = () => {
       <Wrapper>
         <Title>Your Cart</Title>
         <Top>
-          <TopButton>Continue Shopping</TopButton>
+          <NavLink to='/'>
+            <TopButton>Continue Shopping</TopButton>
+          </NavLink>
           <TopTexts>
-            <TopText>Shopping cart (2)</TopText>
+            <TopText>Shopping cart ({cart.products.length})</TopText>
             <TopText>Your wishlist (0)</TopText>
           </TopTexts>
-          <TopButton type='filled'>Checkout Now</TopButton>
+          <TopButton type='filled' onClick={clearCart}>
+            Clear Cart
+          </TopButton>
         </Top>
         <Bottom>
           <Info>
-            {cart.products.map((product) => (
-              <Product>
+            {cart.products.map((product, index) => (
+              <Product key={index}>
                 <ProductDetail>
                   <Image src={product.image} />
                   <Details>
@@ -96,9 +123,9 @@ const Cart = () => {
                 </ProductDetail>
                 <PriceDetail>
                   <ProductAmountContainer>
-                    <Add />
+                    <Remove onClick={() => handleClick('dec', product)} />
                     <ProductAmount>{product.quantity}</ProductAmount>
-                    <Remove />
+                    <Add onClick={() => handleClick('inc', product)} />
                   </ProductAmountContainer>
                   <ProductPrice>
                     {product.price * product.quantity} €
@@ -126,18 +153,22 @@ const Cart = () => {
               <SummaryItemText>Total</SummaryItemText>
               <SummaryItemPrice>{cart.total} €</SummaryItemPrice>
             </SummaryItem>
-            <StripeCheckout
-              name='Immo Store'
-              image='https://images.pexels.com/photos/2235130/pexels-photo-2235130.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'
-              billingAddress
-              shippingAddress
-              description={`Your total is ${cart.total} €`}
-              amount={cart.total * 100}
-              token={onToken}
-              stripeKey={process.env.REACT_APP_STRIPE_KEY}
-            >
-              <Button>Checkout Now</Button>
-            </StripeCheckout>
+            {cart.total !== 0 ? (
+              <StripeCheckout
+                name='Immo Store'
+                image='https://images.pexels.com/photos/2235130/pexels-photo-2235130.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'
+                billingAddress
+                shippingAddress
+                description={`Your total is ${cart.total} €`}
+                amount={cart.total * 100}
+                token={onToken}
+                stripeKey={process.env.REACT_APP_STRIPE_KEY}
+              >
+                <Button>Checkout Now</Button>
+              </StripeCheckout>
+            ) : (
+              <Button>Add items to your cart to checkout</Button>
+            )}
           </Summary>
         </Bottom>
       </Wrapper>

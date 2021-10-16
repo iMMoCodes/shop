@@ -1,3 +1,4 @@
+import { NavLink } from '../../AppStyles'
 import {
   Facebook,
   Instagram,
@@ -51,11 +52,21 @@ const Footer = () => {
       <Center>
         <Title>Links</Title>
         <List>
-          <ListItem>Home</ListItem>
-          <ListItem>Cart</ListItem>
-          <ListItem>Man Fashion</ListItem>
-          <ListItem>Woman Fashion</ListItem>
-          <ListItem>Accessories</ListItem>
+          <ListItem>
+            <NavLink to='/'>Home </NavLink>
+          </ListItem>
+          <ListItem>
+            <NavLink to='/cart'>Cart</NavLink>
+          </ListItem>
+          <ListItem>
+            <NavLink to='/products/men'>Men Fashion</NavLink>
+          </ListItem>
+          <ListItem>
+            <NavLink to='/products/women'>Women Fashion</NavLink>
+          </ListItem>
+          <ListItem>
+            <NavLink to='/products/accessories'>Accessories</NavLink>
+          </ListItem>
           <ListItem>My Account</ListItem>
           <ListItem>Order Tracking</ListItem>
           <ListItem>Wishlist</ListItem>
