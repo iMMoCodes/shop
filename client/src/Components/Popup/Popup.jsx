@@ -72,25 +72,24 @@ export const BasicModal = ({ item }) => {
           <Title>{item.title}</Title>
           <Image src={item.image} alt='product' />
           <FilterContainer>
-            <Filter>
-              <FilterTitle>Color:</FilterTitle>
-              {item.color.map((c) => (
-                <FilterColor color={c} key={c} onClick={() => setColor(c)} />
-              ))}
-            </Filter>
-            <Filter>
-              <FilterTitle>Size:</FilterTitle>
-              <FilterSize>
-                {item.size.map((s) => (
-                  <FilterSizeOption
-                    key={s}
-                    onChange={(e) => setSize(e.target.value)}
-                  >
-                    {s}
-                  </FilterSizeOption>
+            {item.color.length >= 1 && (
+              <Filter>
+                <FilterTitle>Color:</FilterTitle>
+                {item.color.map((c) => (
+                  <FilterColor color={c} key={c} onClick={() => setColor(c)} />
                 ))}
-              </FilterSize>
-            </Filter>
+              </Filter>
+            )}
+            {item.size.length >= 1 && (
+              <Filter>
+                <FilterTitle>Size:</FilterTitle>
+                <FilterSize onChange={(e) => setSize(e.target.value)}>
+                  {item.size.map((s) => (
+                    <FilterSizeOption key={s}>{s}</FilterSizeOption>
+                  ))}
+                </FilterSize>
+              </Filter>
+            )}
           </FilterContainer>
           <AddContainer>
             <AmountContainer>

@@ -47,7 +47,6 @@ const Product = () => {
         console.log(err)
       }
     }
-    console.log(product)
     getProduct()
   }, [id])
 
