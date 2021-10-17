@@ -13,34 +13,49 @@ export const Container = styled.div`
   ${mobile({ height: '100%' })}
 `
 export const Wrapper = styled.div`
-  width: 40%;
+  width: 50%;
   padding: 20px;
   background-color: white;
   ${mobile({ width: '75%', margin: '10px' })}
 `
-export const Title = styled.h1`
-  font-size: 24px;
-  font-weight: 300;
-`
+export const Title = styled.h1``
 export const Form = styled.form`
   display: flex;
   flex-wrap: wrap;
 `
+export const Item = styled.div`
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+  margin-right: 20px;
+`
+export const Label = styled.label`
+  margin-bottom: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  color: rgb(150, 150, 150);
+`
 export const Input = styled.input`
-  flex: 1;
-  min-width: 40%;
-  margin: 20px 10px 0px 0px;
+  height: 20px;
   padding: 10px;
+  border: 1px solid gray;
+  border-radius: 5px;
 `
-export const Agreement = styled.span`
-  font-size: 12px;
-  margin: 20px 0px;
+export const Select = styled.select`
+  height: 40px;
+  border-radius: 5px;
 `
+export const Option = styled.option``
 export const Button = styled.button`
-  width: 40%;
+  width: 200px;
+  max-height: 40px;
   border: none;
-  padding: 15px 20px;
-  background-color: teal;
-  color: black;
+  background-color: darkblue;
+  color: white;
+  padding: 7px 10px;
+  font-weight: 600;
+  border-radius: 10px;
+  margin-top: 40px;
   cursor: pointer;
 `
