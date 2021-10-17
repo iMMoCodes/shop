@@ -1,11 +1,7 @@
 import { NavLink } from '../../AppStyles'
 import { useSelector, useDispatch } from 'react-redux'
 import { logout } from '../../redux/userRedux'
-import {
-  ShoppingCartOutlined,
-  AccountCircle,
-  ExitToApp,
-} from '@material-ui/icons'
+import { ShoppingCartOutlined, ExitToApp } from '@material-ui/icons'
 import { Badge } from '@material-ui/core'
 import { SearchModal } from '../SearchModal/SearchModal'
 import {
@@ -18,6 +14,7 @@ import {
   Logo,
   Right,
   MenuItem,
+  Image,
 } from './NavbarStyles'
 
 const Navbar = () => {
@@ -47,7 +44,7 @@ const Navbar = () => {
             <>
               <NavLink to='/account/details'>
                 <MenuItem>
-                  <AccountCircle style={{ marginRight: '5px' }} />
+                  <Image src={user.image} alt='user image' />
                   My Account
                 </MenuItem>
               </NavLink>

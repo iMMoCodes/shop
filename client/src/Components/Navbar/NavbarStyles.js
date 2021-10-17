@@ -67,3 +67,11 @@ export const MenuItem = styled.div`
   margin-left: 25px;
   ${mobile({ marginLeft: '0px' })}
 `
+
+export const Image = styled.img`
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 10px;
+`

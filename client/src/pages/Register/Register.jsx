@@ -1,6 +1,13 @@
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
+import {
+  getStorage,
+  ref,
+  uploadBytesResumable,
+  getDownloadURL,
+} from 'firebase/storage'
+import app from '../../firebase'
 import { register } from '../../redux/apiCalls'
 import {
   Container,
@@ -15,7 +22,7 @@ import {
 
 const Register = () => {
   const [inputs, setInputs] = useState({})
-  // const [file, setFile] = useState(null)
+  const [file, setFile] = useState(null)
   const dispatch = useDispatch()
   const history = useHistory()
 
@@ -27,10 +34,47 @@ const Register = () => {
 
   const handleClick = (e) => {
     e.preventDefault()
-    register(dispatch, inputs)
-    setTimeout(() => {
-      history.push('/login')
-    }, 3000)
+    const fileName = new Date().getTime() + file.name
+    const storage = getStorage(app)
+    const storageRef = ref(storage, fileName)
+    const uploadTask = uploadBytesResumable(storageRef, file)
+
+    // Register three observers:
+    // 1. 'state_changed' observer, called any time the state changes
+    // 2. Error observer, called on failure
+    // 3. Completion observer, called on successful completion
+    uploadTask.on(
+      'state_changed',
+      (snapshot) => {
+        // Observe state change events such as progress, pause, and resume
+        // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        console.log('Upload is ' + progress + '% done')
+        switch (snapshot.state) {
+          case 'paused':
+            console.log('Upload is paused')
+            break
+          case 'running':
+            console.log('Upload is running')
+            break
+          default:
+        }
+      },
+      (error) => {
+        // Handle unsuccessful uploads
+      },
+      () => {
+        // Handle successful uploads on complete
+        // For instance, get the download URL: https://firebasestorage.googleapis.com/...
+        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+          const registerUser = { ...inputs, image: downloadURL }
+          register(dispatch, registerUser)
+          setTimeout(() => {
+            history.push('/login')
+          }, 3000)
+        })
+      }
+    )
   }
 
   return (
@@ -83,14 +127,14 @@ const Register = () => {
               onChange={handleChange}
             />
           </Item>
-          {/* <Item>
+          <Item>
             <Label>Image</Label>
             <Input
               type='file'
               id='file'
               onChange={(e) => setFile(e.target.files[0])}
             />
-          </Item> */}
+          </Item>
         </Form>
         <Button onClick={handleClick}>Register</Button>
       </Wrapper>

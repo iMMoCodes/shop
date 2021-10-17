@@ -31,7 +31,7 @@ export const register = async (dispatch, user) => {
   }
 }
 
-export const UpdateUser = async (dispatch, id, user, token) => {
+export const updateUser = async (dispatch, id, user, token) => {
   dispatch(updateUserStart())
   try {
     const res = await userRequest.put(`/users/${id}`, user, {

@@ -1,5 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { deleteProduct } from '../../redux/wishRedux'
+import { BasicModal } from '../../Components/Popup/Popup'
 import {
   Container,
   Title,
@@ -15,7 +16,7 @@ import {
   Add,
   Delete,
 } from './WishlistStyles'
-import { AddShoppingCart, DeleteOutline } from '@material-ui/icons'
+import { DeleteOutline } from '@material-ui/icons'
 import Navbar from '../../Components/Navbar/Navbar'
 import Newsletter from '../../Components/Newsletter/Newsletter'
 import Footer from '../../Components/Footer/Footer'
@@ -52,7 +53,7 @@ const Wishlist = () => {
               <Stock>{item.inStock ? 'In stock' : 'Not in stock'}</Stock>
               <Buttons>
                 <Add>
-                  <AddShoppingCart style={{ color: '#4aa83f' }} />
+                  <BasicModal item={item} iconColor='#4aa83f' />
                 </Add>
                 <Delete onClick={() => handleRemove(item._id)}>
                   <DeleteOutline style={{ color: '#e43838' }} />

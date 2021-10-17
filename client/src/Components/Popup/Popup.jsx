@@ -35,7 +35,7 @@ const style = {
   p: 4,
 }
 
-export const BasicModal = ({ item }) => {
+export const BasicModal = ({ item, iconColor }) => {
   const [quantity, setQuantity] = useState(1)
   const [color, setColor] = useState('')
   const [size, setSize] = useState('')
@@ -61,7 +61,10 @@ export const BasicModal = ({ item }) => {
 
   return (
     <>
-      <ShoppingCartOutlined onClick={handleOpen} />
+      <ShoppingCartOutlined
+        onClick={handleOpen}
+        style={{ color: `${iconColor}` }}
+      />
       <Modal
         open={open}
         onClose={handleClose}
