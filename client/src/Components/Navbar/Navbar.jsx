@@ -28,7 +28,6 @@ const Navbar = () => {
   const handleLogout = () => {
     dispatch(logout())
   }
-
   return (
     <Container>
       <Wrapper>
@@ -46,7 +45,7 @@ const Navbar = () => {
         <Right>
           {user ? (
             <>
-              <NavLink to='/myaccount'>
+              <NavLink to='/account/'>
                 <MenuItem>
                   <AccountCircle style={{ marginRight: '5px' }} />
                   My Account
