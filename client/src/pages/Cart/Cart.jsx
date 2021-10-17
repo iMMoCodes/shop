@@ -42,6 +42,7 @@ import {
 
 const Cart = () => {
   const cart = useSelector((state) => state.cart)
+  const wish = useSelector((state) => state.wish)
   const [stripeToken, setStripeToken] = useState(null)
   const history = useHistory()
   const dispatch = useDispatch()
@@ -96,7 +97,9 @@ const Cart = () => {
           </NavLink>
           <TopTexts>
             <TopText>Shopping cart ({cart.products.length})</TopText>
-            <TopText>Your wishlist (0)</TopText>
+            <NavLink to='/wishlist'>
+              <TopText>Your wishlist ({wish.products.length})</TopText>
+            </NavLink>
           </TopTexts>
           <TopButton type='filled' onClick={clearCart}>
             Clear Cart

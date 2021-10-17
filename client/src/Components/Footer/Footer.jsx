@@ -69,7 +69,9 @@ const Footer = () => {
           </ListItem>
           <ListItem>My Account</ListItem>
           <ListItem>Order Tracking</ListItem>
-          <ListItem>Wishlist</ListItem>
+          <NavLink to='/wishlist'>
+            <ListItem>Wishlist</ListItem>
+          </NavLink>
           <ListItem>Terms</ListItem>
         </List>
       </Center>

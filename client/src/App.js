@@ -13,6 +13,7 @@ import Login from './pages/Login/Login'
 import Cart from './pages/Cart/Cart'
 import Success from './pages/Success/Success'
 import Account from './pages/Account/Account'
+import Wishlist from './pages/Wishlist/Wishlist'
 
 const App = () => {
   const user = useSelector((state) => state.user.currentUser)
@@ -40,6 +41,9 @@ const App = () => {
         </Route>
         <Route path='/account'>
           <Account />
+        </Route>
+        <Route path='/wishlist'>
+          <Wishlist />
         </Route>
       </Switch>
     </Router>
