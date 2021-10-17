@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
+import { useHistory } from 'react-router-dom'
 import { register } from '../../redux/apiCalls'
 import {
   Container,
@@ -16,6 +17,7 @@ const Register = () => {
   const [inputs, setInputs] = useState({})
   // const [file, setFile] = useState(null)
   const dispatch = useDispatch()
+  const history = useHistory()
 
   const handleChange = (e) => {
     setInputs((prev) => {
@@ -26,6 +28,9 @@ const Register = () => {
   const handleClick = (e) => {
     e.preventDefault()
     register(dispatch, inputs)
+    setTimeout(() => {
+      history.push('/login')
+    }, 3000)
   }
 
   return (

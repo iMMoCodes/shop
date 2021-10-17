@@ -1,15 +1,12 @@
 const User = require('../models/User')
-const CryptoJS = require('crypto-js')
+const bcrypt = require('bcrypt')
 
 // Update User
 const updateUser = async (req, res) => {
-  if (req.body.password) {
-    req.body.password = CryptoJS.AES.encrypt(
-      req.body.password,
-      process.env.CRYPTO_SECRET
-    ).toString()
-  }
   try {
+    if (req.body.password) {
+      req.body.password = await bcrypt.hash(req.body.password, 12)
+    }
     const updatedUser = await User.findByIdAndUpdate(
       req.params.id,
       {
@@ -18,7 +15,7 @@ const updateUser = async (req, res) => {
       { new: true }
     )
     const { password, ...others } = updatedUser._doc
-    res.status(200).json(...others)
+    res.status(200).json({ ...others })
   } catch (err) {
     res.status(500).json({ status: 'error', err })
   }

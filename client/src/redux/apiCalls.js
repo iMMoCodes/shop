@@ -5,8 +5,11 @@ import {
   registerFailure,
   registerStart,
   registerSuccess,
+  updateUserFailure,
+  updateUserStart,
+  updateUserSuccess,
 } from './userRedux'
-import { publicRequest } from '../requestMethods'
+import { publicRequest, userRequest } from '../requestMethods'
 
 export const login = async (dispatch, user) => {
   dispatch(loginStart())
@@ -21,9 +24,21 @@ export const login = async (dispatch, user) => {
 export const register = async (dispatch, user) => {
   dispatch(registerStart())
   try {
-    const res = await publicRequest.post('/auth/register', user)
-    dispatch(registerSuccess(res.data))
+    await publicRequest.post('/auth/register', user)
+    dispatch(registerSuccess())
   } catch (err) {
     dispatch(registerFailure())
+  }
+}
+
+export const UpdateUser = async (dispatch, id, user, token) => {
+  dispatch(updateUserStart())
+  try {
+    const res = await userRequest.put(`/users/${id}`, user, {
+      headers: { authorization: `Bearer ${token}` },
+    })
+    dispatch(updateUserSuccess(res.data))
+  } catch (err) {
+    dispatch(updateUserFailure())
   }
 }

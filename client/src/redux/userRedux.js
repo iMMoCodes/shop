@@ -21,6 +21,7 @@ const userSlice = createSlice({
         image: action.payload.image,
         _id: action.payload.userId,
         isAdmin: action.payload.isAdmin,
+        accessToken: action.payload.accessToken,
       }
       state.error = false
     },
@@ -31,20 +32,24 @@ const userSlice = createSlice({
     registerStart: (state) => {
       state.pending = true
     },
-    registerSuccess: (state, action) => {
+    registerSuccess: (state) => {
       state.pending = false
-      state.currentUser = {
-        username: action.payload.username,
-        firstName: action.payload.firstName,
-        lastName: action.payload.lastName,
-        email: action.payload.email,
-        image: action.payload.image,
-        _id: action.payload._id,
-        isAdmin: action.payload.isAdmin,
-      }
+      state.currentUser = null
       state.error = false
     },
     registerFailure: (state) => {
+      state.pending = false
+      state.error = true
+    },
+    updateUserStart: (state) => {
+      state.pending = true
+    },
+    updateUserSuccess: (state, action) => {
+      state.pending = false
+      state.currentUser = Object.assign(state.currentUser, action.payload)
+      state.error = false
+    },
+    updateUserFailure: (state) => {
       state.pending = false
       state.error = true
     },
@@ -62,6 +67,9 @@ export const {
   registerStart,
   registerSuccess,
   registerFailure,
+  updateUserStart,
+  updateUserSuccess,
+  updateUserFailure,
   logout,
 } = userSlice.actions
 export default userSlice.reducer

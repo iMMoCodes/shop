@@ -1,7 +1,8 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
+import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import Navbar from '../../Components/Navbar/Navbar'
 import { Sidebar } from '../../Components/Sidebar/Sidebar'
+import { UpdateUser } from '../../redux/apiCalls'
 import {
   Button,
   ButtonDiv,
@@ -19,7 +20,21 @@ import {
 } from './AccountDetailsStyles'
 
 const AccountDetails = () => {
+  const [inputs, setInputs] = useState({})
+  const dispatch = useDispatch()
   const user = useSelector((state) => state.user.currentUser)
+
+  const handleChange = (e) => {
+    setInputs((prev) => {
+      return { ...prev, [e.target.name]: e.target.value }
+    })
+  }
+
+  const handleClick = (e) => {
+    e.preventDefault()
+    UpdateUser(dispatch, user._id, inputs, user.accessToken)
+  }
+
   return (
     <>
       <Container>
@@ -38,15 +53,30 @@ const AccountDetails = () => {
               <Form>
                 <FormItem>
                   <Label>First Name</Label>
-                  <Input type='text' placeholder={user.firstName} />
+                  <Input
+                    type='text'
+                    placeholder={user.firstName}
+                    name='firstName'
+                    onChange={handleChange}
+                  />
                 </FormItem>
                 <FormItem>
                   <Label>Last Name</Label>
-                  <Input type='text' placeholder={user.lastName} />
+                  <Input
+                    type='text'
+                    placeholder={user.lastName}
+                    name='lastName'
+                    onChange={handleChange}
+                  />
                 </FormItem>
                 <FormItem>
                   <Label>Password</Label>
-                  <Input type='password' placeholder='********' />
+                  <Input
+                    type='password'
+                    placeholder='********'
+                    name='password'
+                    onChange={handleChange}
+                  />
                 </FormItem>
                 <FormItem>
                   <Label>Image</Label>
@@ -55,7 +85,7 @@ const AccountDetails = () => {
               </Form>
             </Info>
             <ButtonDiv>
-              <Button>Save</Button>
+              <Button onClick={handleClick}>Save</Button>
             </ButtonDiv>
             <Subtitle>Email Address</Subtitle>
             <Info>
@@ -67,7 +97,12 @@ const AccountDetails = () => {
               <Form>
                 <FormItem>
                   <Label>Email</Label>
-                  <Input type='email' placeholder={user.email} />
+                  <Input
+                    type='email'
+                    placeholder={user.email}
+                    name='email'
+                    onChange={handleChange}
+                  />
                 </FormItem>
               </Form>
             </Info>
