@@ -57,22 +57,26 @@ const loginUser = async (req, res) => {
 }
 
 // Verify token
-const verifyToken = (req, res, next) => {
-  const authHeader = req.headers.token
-  if (authHeader) {
-    const token = authHeader.split(' ')[1]
-    jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
-      if (err)
-        res
-          .status(403)
-          .json({ status: 'error', message: 'Token is not valid!' })
-      req.user = user
-      next()
-    })
-  } else {
-    return res
-      .status(401)
-      .json({ status: 'error', message: 'You are not authenticated!' })
+const verifyToken = async (req, res, next) => {
+  try {
+    const authHeader = req.headers.token
+    if (authHeader) {
+      const token = authHeader.split(' ')[1]
+      jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
+        if (err)
+          res
+            .status(403)
+            .json({ status: 'error', message: 'Token is not valid!' })
+        req.user = user
+        next()
+      })
+    } else {
+      return res
+        .status(401)
+        .json({ status: 'error', message: 'You are not authenticated!' })
+    }
+  } catch (err) {
+    res.status(500).json({ status: 'error', err })
   }
 }
 

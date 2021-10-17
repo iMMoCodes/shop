@@ -14,6 +14,7 @@ const userSlice = createSlice({
     loginSuccess: (state, action) => {
       state.pending = false
       state.currentUser = action.payload
+      state.error = false
     },
     loginFailure: (state) => {
       state.pending = false
@@ -21,6 +22,7 @@ const userSlice = createSlice({
     },
     logout: (state) => {
       state.currentUser = null
+      state.error = false
     },
   },
 })

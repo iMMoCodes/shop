@@ -126,5 +126,6 @@ export const Button = styled.button`
   padding: 10px;
   background-color: black;
   color: white;
+  cursor: pointer;
   font-weight: 600;
 `
