@@ -1,6 +1,11 @@
 import { NavLink } from '../../AppStyles'
-import { useSelector } from 'react-redux'
-import { ShoppingCartOutlined } from '@material-ui/icons'
+import { useSelector, useDispatch } from 'react-redux'
+import { logout } from '../../redux/userRedux'
+import {
+  ShoppingCartOutlined,
+  AccountCircle,
+  ExitToApp,
+} from '@material-ui/icons'
 import { Badge } from '@material-ui/core'
 import { SearchModal } from '../SearchModal/SearchModal'
 import {
@@ -17,6 +22,12 @@ import {
 
 const Navbar = () => {
   const quantity = useSelector((state) => state.cart.quantity)
+  const user = useSelector((state) => state.user.currentUser)
+  const dispatch = useDispatch()
+
+  const handleLogout = () => {
+    dispatch(logout())
+  }
 
   return (
     <Container>
@@ -33,12 +44,29 @@ const Navbar = () => {
           </NavLink>
         </Center>
         <Right>
-          <NavLink to='/register'>
-            <MenuItem>REGISTER</MenuItem>
-          </NavLink>
-          <NavLink to='/login'>
-            <MenuItem>SIGN IN</MenuItem>
-          </NavLink>
+          {user ? (
+            <>
+              <NavLink to='/myaccount'>
+                <MenuItem>
+                  <AccountCircle style={{ marginRight: '5px' }} />
+                  My Account
+                </MenuItem>
+              </NavLink>
+              <MenuItem onClick={handleLogout}>
+                <ExitToApp style={{ marginRight: '5px' }} />
+                Log Out
+              </MenuItem>
+            </>
+          ) : (
+            <>
+              <NavLink to='/register'>
+                <MenuItem>Register</MenuItem>
+              </NavLink>
+              <NavLink to='/login'>
+                <MenuItem>Sign In</MenuItem>
+              </NavLink>
+            </>
+          )}
           <NavLink to='/cart'>
             <MenuItem>
               <Badge badgeContent={quantity} color='primary'>

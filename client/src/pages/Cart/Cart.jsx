@@ -75,15 +75,15 @@ const Cart = () => {
       try {
         const res = await userRequest.post('/checkout/payment', {
           tokenId: stripeToken.id,
-          amount: 5 * 100,
+          amount: cart.total,
         })
-        history.push('/success', { data: res.data })
+        history.push('/success', { stripeData: res.data, cart })
       } catch (err) {
         console.log(err)
       }
     }
     stripeToken && makeRequest()
-  }, [stripeToken, cart.total, history])
+  }, [stripeToken, cart.total, history, cart])
   return (
     <Container>
       <Announcement />

@@ -28,6 +28,11 @@ const loginUser = async (req, res) => {
     !user &&
       res.status(401).json({ status: 'error', message: 'Wrong credentials!' })
 
+    const userId = user._id.toString()
+    const username = user.username
+    const email = user.email
+    const isAdmin = user.isAdmin
+
     const hashedPassword = CryptoJS.AES.decrypt(
       user.password,
       process.env.CRYPTO_SECRET
@@ -38,15 +43,14 @@ const loginUser = async (req, res) => {
 
     const accessToken = jwt.sign(
       {
-        id: user._id,
+        id: userId,
         isAdmin: user.isAdmin,
       },
       process.env.JWT_SECRET,
       { expiresIn: '3d' }
     )
-    const { password, ...others } = user._doc
 
-    res.status(200).json(...others, accessToken)
+    res.status(200).json({ userId, username, email, isAdmin, accessToken })
   } catch (err) {
     res.status(500).json({ status: 'error', err })
   }
@@ -75,7 +79,7 @@ const verifyToken = (req, res, next) => {
 // Verify and Authorization
 const verifyTokenAndAuthorize = (req, res, next) => {
   verifyToken(req, res, () => {
-    if (req.user.id === req.params.id || req.user.isAdmin) {
+    if (req.user.id === req.params.userId || req.user.isAdmin) {
       next()
     } else {
       res

@@ -59,6 +59,9 @@ export const Right = styled.div`
 `
 
 export const MenuItem = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-size: 14px;
   cursor: pointer;
   margin-left: 25px;

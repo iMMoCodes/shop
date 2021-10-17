@@ -7,5 +7,7 @@ export const Container = styled.div`
   align-items: center;
   justify-content: center;
 `
-export const Title = styled.h1``
-export const Text = styled.p``
+export const Button = styled.button`
+  padding: 10;
+  margin-top: 20;
+`
