@@ -12,7 +12,7 @@ import Register from './pages/Register/Register'
 import Login from './pages/Login/Login'
 import Cart from './pages/Cart/Cart'
 import Success from './pages/Success/Success'
-import Account from './pages/Account/Account'
+import AccountDetails from './pages/AccountDetails/AccountDetails'
 import Wishlist from './pages/Wishlist/Wishlist'
 
 const App = () => {
@@ -39,8 +39,8 @@ const App = () => {
         <Route path='/register'>
           {user ? <Redirect to='/' /> : <Register />}
         </Route>
-        <Route path='/account'>
-          <Account />
+        <Route path='/account/details'>
+          <AccountDetails />
         </Route>
         <Route path='/wishlist'>
           <Wishlist />

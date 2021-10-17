@@ -19,7 +19,7 @@ const userSlice = createSlice({
         lastName: action.payload.lastName,
         email: action.payload.email,
         image: action.payload.image,
-        _id: action.payload._id,
+        _id: action.payload.userId,
         isAdmin: action.payload.isAdmin,
       }
       state.error = false

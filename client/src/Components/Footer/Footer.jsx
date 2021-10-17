@@ -1,4 +1,5 @@
 import { NavLink } from '../../AppStyles'
+import { useSelector } from 'react-redux'
 import {
   Facebook,
   Instagram,
@@ -25,6 +26,7 @@ import {
 } from './FooterStyles'
 
 const Footer = () => {
+  const user = useSelector((state) => state.user.currentUser)
   return (
     <Container>
       <Left>
@@ -67,11 +69,17 @@ const Footer = () => {
           <ListItem>
             <NavLink to='/products/accessories'>Accessories</NavLink>
           </ListItem>
-          <ListItem>My Account</ListItem>
-          <ListItem>Order Tracking</ListItem>
-          <NavLink to='/wishlist'>
-            <ListItem>Wishlist</ListItem>
-          </NavLink>
+          {user && (
+            <>
+              <NavLink to='/account/details'>
+                <ListItem>Account</ListItem>
+              </NavLink>
+              <ListItem>Order Tracking</ListItem>
+              <NavLink to='/wishlist'>
+                <ListItem>Wishlist</ListItem>
+              </NavLink>
+            </>
+          )}
           <ListItem>Terms</ListItem>
         </List>
       </Center>

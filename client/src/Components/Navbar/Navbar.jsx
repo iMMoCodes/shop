@@ -45,7 +45,7 @@ const Navbar = () => {
         <Right>
           {user ? (
             <>
-              <NavLink to='/account/'>
+              <NavLink to='/account/details'>
                 <MenuItem>
                   <AccountCircle style={{ marginRight: '5px' }} />
                   My Account
