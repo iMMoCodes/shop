@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { NavLink } from '../../AppStyles'
 import { useSelector } from 'react-redux'
 import { useLocation } from 'react-router'
 import { userRequest } from '../../requestMethods'
@@ -8,7 +9,6 @@ const Success = () => {
   const location = useLocation()
   const data = location.state.stripeData
   const cart = location.state.cart
-  console.log(location, data, cart)
   const currentUser = useSelector((state) => state.user.currentUser)
   const [orderId, setOrderId] = useState(null)
 
@@ -16,7 +16,7 @@ const Success = () => {
     const createOrder = async () => {
       try {
         const res = await userRequest.post('/orders', {
-          userId: currentUser.userId,
+          userId: currentUser.userId || data.id,
           products: cart.products.map((item) => ({
             productId: item._id,
             quantity: item._quantity,
@@ -37,7 +37,9 @@ const Success = () => {
       {orderId
         ? `Your order has been created successfully. Your order number is ${orderId}`
         : `Successful. Your order is being prepared...`}
-      <Button>Go to Homepage</Button>
+      <Button>
+        <NavLink to='/'>Go to Homepage</NavLink>
+      </Button>
     </Container>
   )
 }

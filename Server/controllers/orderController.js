@@ -2,8 +2,8 @@ const Order = require('../models/Order')
 
 // Create Order
 const createOrder = async (req, res) => {
-  const newOrder = new Order(req.body)
   try {
+    const newOrder = new Order(req.body)
     const savedOrder = await newOrder.save()
     res.status(201).json(savedOrder)
   } catch (err) {

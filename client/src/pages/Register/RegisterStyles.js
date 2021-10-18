@@ -48,7 +48,8 @@ export const Select = styled.select`
 `
 export const Option = styled.option``
 export const Button = styled.button`
-  width: 200px;
+  display: block;
+  max-width: 200px;
   max-height: 40px;
   border: none;
   background-color: darkblue;
@@ -56,6 +57,6 @@ export const Button = styled.button`
   padding: 7px 10px;
   font-weight: 600;
   border-radius: 10px;
-  margin-top: 40px;
+  margin: 40px 0;
   cursor: pointer;
 `

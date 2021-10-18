@@ -15,6 +15,7 @@ export const Top = styled.div`
   align-items: center;
   justify-content: space-between;
   padding: 20px;
+  ${mobile({ flexDirection: 'column' })}
 `
 export const TopButton = styled.button`
   padding: 10px;
@@ -27,7 +28,7 @@ export const TopButton = styled.button`
   ${mobile({ margin: '0px 10px' })}
 `
 export const TopTexts = styled.div`
-  ${mobile({ display: 'none' })}
+  ${mobile({ display: 'flex', flexDirection: 'column' })}
 `
 export const TopText = styled.span`
   text-decoration: underline;

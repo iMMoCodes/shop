@@ -18,10 +18,10 @@ export const sliderItems = [
   {
     id: 3,
     img: 'https://images.pexels.com/photos/974911/pexels-photo-974911.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
-    title: 'Bags & Purses',
+    title: 'Purses',
     desc: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
     bg: '#fbf0f4',
-    link: '/products/bags',
+    link: '/products/purses',
   },
 ]
 
@@ -34,9 +34,9 @@ export const categories = [
   },
   {
     id: 2,
-    img: 'https://images.pexels.com/photos/8725591/pexels-photo-8725591.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
-    title: 'Dresses',
-    cat: 'dresses',
+    img: 'https://images.unsplash.com/photo-1606522754091-a3bbf9ad4cb3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=842&q=80',
+    title: 'Purses',
+    cat: 'purses',
   },
   {
     id: 3,

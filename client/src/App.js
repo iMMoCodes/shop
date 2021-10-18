@@ -14,6 +14,7 @@ import Cart from './pages/Cart/Cart'
 import Success from './pages/Success/Success'
 import AccountDetails from './pages/AccountDetails/AccountDetails'
 import Wishlist from './pages/Wishlist/Wishlist'
+import Error from './pages/Error/Error'
 
 const App = () => {
   const user = useSelector((state) => state.user.currentUser)
@@ -46,6 +47,9 @@ const App = () => {
         </Route>
         <Route path='/wishlist'>
           <Wishlist />
+        </Route>
+        <Route path='*'>
+          <Error />
         </Route>
       </Switch>
     </Router>

@@ -2,8 +2,8 @@ const Cart = require('../models/Cart')
 
 // Create Cart
 const createCart = async (req, res) => {
-  const newCart = new Cart(req.body)
   try {
+    const newCart = new Cart(req.body)
     const savedCart = await newCart.save()
     res.status(201).json(savedCart)
   } catch (err) {

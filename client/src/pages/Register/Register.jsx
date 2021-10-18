@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
+import { NavLink } from '../../AppStyles'
 import {
   getStorage,
   ref,
@@ -130,6 +131,7 @@ const Register = () => {
           <Item>
             <Label>Image</Label>
             <Input
+              style={{ width: '200px' }}
               type='file'
               id='file'
               onChange={(e) => setFile(e.target.files[0])}
@@ -137,6 +139,7 @@ const Register = () => {
           </Item>
         </Form>
         <Button onClick={handleClick}>Register</Button>
+        <NavLink to='/'>Back to Homepage</NavLink>
       </Wrapper>
     </Container>
   )

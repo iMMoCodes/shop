@@ -2,11 +2,11 @@ import styled from 'styled-components'
 
 export const Info = styled.div`
   opacity: 0;
-  width: 100%;
-  height: 100%;
+  width: 300px;
+  height: 300px;
   position: absolute;
-  top: 0;
-  left: 0;
+  top: -18px;
+  left: -7px;
   background-color: rgba(0, 0, 0, 0.2);
   z-index: 3;
   display: flex;
@@ -16,12 +16,13 @@ export const Info = styled.div`
 `
 
 export const Container = styled.div`
-  flex: 1;
+  /* flex: 1; */
   margin: 5px;
   min-width: 280px;
   height: 350px;
   display: flex;
-  align-items: center;
+  flex-wrap: wrap;
+  align-items: flex-start;
   justify-content: center;
   background-color: #f5fbfd;
   position: relative;
