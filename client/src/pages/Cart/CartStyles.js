@@ -130,3 +130,8 @@ export const Button = styled.button`
   cursor: pointer;
   font-weight: 600;
 `
+export const LoginText = styled.span`
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+`

@@ -38,11 +38,13 @@ import {
   SummaryItemText,
   SummaryItemPrice,
   Button,
+  LoginText,
 } from './CartStyles'
 
 const Cart = () => {
   const cart = useSelector((state) => state.cart)
   const wish = useSelector((state) => state.wish)
+  const user = useSelector((state) => state.user.currentUser)
   const [stripeToken, setStripeToken] = useState(null)
   const history = useHistory()
   const dispatch = useDispatch()
@@ -156,7 +158,7 @@ const Cart = () => {
               <SummaryItemText>Total</SummaryItemText>
               <SummaryItemPrice>{cart.total} €</SummaryItemPrice>
             </SummaryItem>
-            {cart.total !== 0 ? (
+            {cart.total !== 0 && user ? (
               <StripeCheckout
                 name='Immo Store'
                 image='https://images.pexels.com/photos/2235130/pexels-photo-2235130.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'
@@ -170,7 +172,17 @@ const Cart = () => {
                 <Button>Checkout Now</Button>
               </StripeCheckout>
             ) : (
-              <Button>Add items to your cart to checkout</Button>
+              <>
+                <Button>
+                  You have to be logged in and have items in your cart to
+                  checkout.
+                </Button>
+                {!user ? (
+                  <NavLink to='/login'>
+                    <LoginText>Click here to login</LoginText>
+                  </NavLink>
+                ) : null}
+              </>
             )}
           </Summary>
         </Bottom>

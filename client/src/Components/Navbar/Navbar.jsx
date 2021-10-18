@@ -16,6 +16,7 @@ import {
   MenuItem,
   Image,
 } from './NavbarStyles'
+import { deleteCart } from '../../redux/cartRedux'
 
 const Navbar = () => {
   const quantity = useSelector((state) => state.cart.quantity)
@@ -24,6 +25,7 @@ const Navbar = () => {
 
   const handleLogout = () => {
     dispatch(logout())
+    dispatch(deleteCart())
   }
   return (
     <Container>

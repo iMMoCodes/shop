@@ -1,27 +1,17 @@
 import { useEffect, useState } from 'react'
 import Product from '../Product/Product'
-import axios from 'axios'
+import { useDispatch, useSelector } from 'react-redux'
+import { getProducts } from '../../redux/apiCalls'
 import { Container } from './ProductsStyles'
 
 const Products = ({ category, filters, sort }) => {
-  const [products, setProducts] = useState([])
+  const dispatch = useDispatch()
+  const products = useSelector((state) => state.product.products)
   const [filteredProducts, setFilteredProducts] = useState([])
 
   useEffect(() => {
-    const getProducts = async () => {
-      try {
-        const res = await axios.get(
-          category
-            ? `http://localhost:5000/api/v1/products?category=${category}`
-            : `http://localhost:5000/api/v1/products`
-        )
-        setProducts(res.data)
-      } catch (err) {
-        console.log(err)
-      }
-    }
-    getProducts()
-  }, [category])
+    category ? getProducts(dispatch, category) : getProducts(dispatch)
+  }, [category, dispatch])
 
   useEffect(() => {
     category &&

@@ -10,6 +10,11 @@ import {
   updateUserSuccess,
 } from './userRedux'
 import { publicRequest, userRequest } from '../requestMethods'
+import {
+  getProductFailure,
+  getProductStart,
+  getProductSuccess,
+} from './productRedux'
 
 export const login = async (dispatch, user) => {
   dispatch(loginStart())
@@ -40,5 +45,17 @@ export const updateUser = async (dispatch, id, user, token) => {
     dispatch(updateUserSuccess(res.data))
   } catch (err) {
     dispatch(updateUserFailure())
+  }
+}
+
+export const getProducts = async (dispatch, category) => {
+  dispatch(getProductStart())
+  try {
+    const res = category
+      ? await publicRequest.get(`/products?${category}`)
+      : await publicRequest.get('/products')
+    dispatch(getProductSuccess(res.data))
+  } catch (err) {
+    dispatch(getProductFailure())
   }
 }

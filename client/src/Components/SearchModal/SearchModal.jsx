@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import Box from '@mui/material/Box'
 import Modal from '@mui/material/Modal'
 import { Search } from '@material-ui/icons'
 import { NavLink } from '../../AppStyles'
-import axios from 'axios'
 import { Container, Image, Input, Item, Title } from './SearchModalStyles'
+import { useSelector } from 'react-redux'
 
 const style = {
   position: 'absolute',
@@ -27,19 +27,7 @@ export const SearchModal = () => {
   const handleOpen = () => setOpen(true)
   const handleClose = () => setOpen(false)
   const [search, setSearch] = useState('')
-  const [products, setProducts] = useState([])
-
-  useEffect(() => {
-    const getProducts = async () => {
-      try {
-        const res = await axios.get(`http://localhost:5000/api/v1/products`)
-        setProducts(res.data)
-      } catch (err) {
-        console.log(err)
-      }
-    }
-    getProducts()
-  }, [])
+  const products = useSelector((state) => state.product.products)
 
   return (
     <>
