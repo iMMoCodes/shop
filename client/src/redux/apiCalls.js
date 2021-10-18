@@ -52,7 +52,7 @@ export const getProducts = async (dispatch, category) => {
   dispatch(getProductStart())
   try {
     const res = category
-      ? await publicRequest.get(`/products?${category}`)
+      ? await publicRequest.get(`/products?category=${category}`)
       : await publicRequest.get('/products')
     dispatch(getProductSuccess(res.data))
   } catch (err) {
