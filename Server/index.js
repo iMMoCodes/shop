@@ -7,6 +7,7 @@ const helmet = require('helmet')
 const mongoSanitize = require('express-mongo-sanitize')
 const xss = require('xss-clean')
 const hpp = require('hpp')
+const cookieParser = require('cookie-parser')
 const userRoute = require('./routes/user')
 const authRoute = require('./routes/auth')
 const productRoute = require('./routes/product')
@@ -27,9 +28,16 @@ const limiter = rateLimit({
 })
 app.use('/api', limiter)
 // Cross-origin resource sharing
-app.use(cors())
+app.use(
+  cors({
+    origin: 'http://localhost:3000',
+    credentials: true,
+  })
+)
 // Body parser
 app.use(express.json())
+// Cookie parser
+app.use(cookieParser())
 // Data sanitization against NoSQL query injection
 app.use(mongoSanitize())
 // Data sanitization against XSS

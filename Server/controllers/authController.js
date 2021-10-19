@@ -17,7 +17,7 @@ const createSendToken = (user, statusCode, res) => {
       Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000
     ),
     // secure: true,
-    httpOnly: true,
+    // httpOnly: true,
   }
 
   res.cookie('jwt', token, cookieOptions)
@@ -25,6 +25,7 @@ const createSendToken = (user, statusCode, res) => {
   user.password = undefined
 
   res.status(statusCode).json({
+    status: 'success',
     token,
     user,
   })
@@ -79,41 +80,26 @@ const loginUser = async (req, res) => {
 
 const protect = async (req, res, next) => {
   try {
-    let token
-    if (
-      req.headers.authorization &&
-      req.headers.authorization.startsWith('Bearer')
-    ) {
-      token = req.headers.authorization.split(' ')[1]
+    if (req.cookies.jwt) {
+      const decoded = await promisify(jwt.verify)(
+        req.cookies.jwt,
+        process.env.JWT_SECRET
+      )
+
+      const currentUser = await User.findById(decoded.id)
+      if (!currentUser) {
+        return next()
+      }
+
+      if (currentUser.changedPasswordAfter(decoded.iat)) {
+        return next()
+      }
+      const id = currentUser._id.toString()
+      const editedUser = { ...currentUser._doc, _id: id }
+      req.user = editedUser
+
+      return next()
     }
-
-    if (!token) {
-      return res.status(401).json({
-        status: 'error',
-        message: 'You are not logged in. Please log in to get access.',
-      })
-    }
-
-    const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET)
-
-    const currentUser = await User.findById(decoded.id)
-    if (!currentUser) {
-      return res.status(401).json({
-        status: 'error',
-        message: 'The user belonging to this token does no longer exists.',
-      })
-    }
-
-    if (currentUser.changedPasswordAfter(decoded.iat)) {
-      return res.status(401).json({
-        status: 'error',
-        message: 'User recently changed password! Please login again.',
-      })
-    }
-    const id = currentUser._id.toString()
-    const editedUser = { ...currentUser._doc, _id: id }
-    req.user = editedUser
-
     next()
   } catch (err) {
     return res.status(500).json({ status: 'err', err })
@@ -156,7 +142,9 @@ const forgotPassword = async (req, res, next) => {
         subject: 'Your password reset token (valid for 10min)',
         message,
       })
-      res.status(200).json('Token sent to email!')
+      res
+        .status(200)
+        .json({ status: 'success', message: 'Token sent to email!' })
     } catch (err) {
       user.passwordResetToken = undefined
       user.passwordResetExpires = undefined
