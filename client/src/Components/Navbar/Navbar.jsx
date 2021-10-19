@@ -46,7 +46,10 @@ const Navbar = () => {
             <>
               <NavLink to='/account/details'>
                 <MenuItem>
-                  <Image src={user.image} alt='user image' />
+                  <Image
+                    src={user.image || '/blankprofile.png'}
+                    alt='user image'
+                  />
                   My Account
                 </MenuItem>
               </NavLink>
@@ -60,7 +63,7 @@ const Navbar = () => {
               <NavLink to='/register'>
                 <MenuItem>Register</MenuItem>
               </NavLink>
-              <NavLink to='/login'>
+              <NavLink to='/login' onClick={() => dispatch(logout())}>
                 <MenuItem>Sign In</MenuItem>
               </NavLink>
             </>

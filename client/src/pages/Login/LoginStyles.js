@@ -21,10 +21,16 @@ export const Wrapper = styled.div`
 export const Title = styled.h1`
   font-size: 24px;
   font-weight: 300;
+  margin-bottom: 20px;
 `
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
+`
+export const Label = styled.label`
+  font-size: 14px;
+  font-weight: 600;
+  color: rgb(150, 150, 150);
 `
 export const Input = styled.input`
   flex: 1;
@@ -51,6 +57,9 @@ export const LoginLink = styled(Link)`
   cursor: pointer;
 `
 
-export const Error = styled.span`
-  color: red;
+export const Error = styled.div`
+  margin: 10px 0px;
+  color: #a30021;
+  font-size: 18px;
+  font-weight: 600;
 `

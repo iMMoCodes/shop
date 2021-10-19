@@ -6,40 +6,39 @@ const userSlice = createSlice({
     currentUser: null,
     pending: false,
     error: false,
+    success: false,
   },
   reducers: {
-    loginStart: (state) => {
-      state.pending = true
-    },
-    loginSuccess: (state, action) => {
-      state.pending = false
-      state.currentUser = {
-        username: action.payload.username,
-        firstName: action.payload.firstName,
-        lastName: action.payload.lastName,
-        email: action.payload.email,
-        image: action.payload.image,
-        _id: action.payload.userId,
-        isAdmin: action.payload.isAdmin,
-        accessToken: action.payload.accessToken,
-      }
-      state.error = false
-    },
-    loginFailure: (state) => {
-      state.pending = false
-      state.error = true
-    },
     registerStart: (state) => {
       state.pending = true
+      state.error = false
+      state.success = false
     },
     registerSuccess: (state) => {
       state.pending = false
       state.currentUser = null
       state.error = false
+      state.success = true
     },
-    registerFailure: (state) => {
+    registerFailure: (state, action) => {
       state.pending = false
-      state.error = true
+      state.error = action.payload
+      state.success = false
+    },
+    loginStart: (state) => {
+      state.pending = true
+      state.success = false
+    },
+    loginSuccess: (state, action) => {
+      state.pending = false
+      state.currentUser = action.payload.user
+      state.error = false
+      state.success = true
+    },
+    loginFailure: (state, action) => {
+      state.pending = false
+      state.error = action.payload.message
+      state.success = false
     },
     updateUserStart: (state) => {
       state.pending = true
@@ -54,8 +53,10 @@ const userSlice = createSlice({
       state.error = true
     },
     logout: (state) => {
+      state.pending = false
       state.currentUser = null
       state.error = false
+      state.success = false
     },
   },
 })

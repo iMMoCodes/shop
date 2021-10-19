@@ -57,6 +57,16 @@ export const Button = styled.button`
   padding: 7px 10px;
   font-weight: 600;
   border-radius: 10px;
-  margin: 40px 0;
+  margin: 20px 0;
   cursor: pointer;
+`
+export const Links = styled.div`
+  display: flex;
+  flex-direction: column;
+`
+export const ErrorMessage = styled.div`
+  color: #a30021;
+  display: flex;
+  align-items: center;
+  font-size: 16px;
 `

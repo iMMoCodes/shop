@@ -19,10 +19,12 @@ import {
 export const login = async (dispatch, user) => {
   dispatch(loginStart())
   try {
-    const res = await publicRequest.post('/auth/login', user)
+    const res = await publicRequest.post('/auth/login', user, {
+      withCredentials: true,
+    })
     dispatch(loginSuccess(res.data))
   } catch (err) {
-    dispatch(loginFailure())
+    dispatch(loginFailure(err.response.data))
   }
 }
 
@@ -32,7 +34,7 @@ export const register = async (dispatch, user) => {
     await publicRequest.post('/auth/register', user)
     dispatch(registerSuccess())
   } catch (err) {
-    dispatch(registerFailure())
+    dispatch(registerFailure(err.response?.data))
   }
 }
 
