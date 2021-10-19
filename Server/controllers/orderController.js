@@ -1,63 +1,15 @@
 const Order = require('../models/Order')
+const factory = require('./handlerFactory')
 
-// Create Order
-const createOrder = async (req, res) => {
-  try {
-    const newOrder = new Order(req.body)
-    const savedOrder = await newOrder.save()
-    res.status(201).json(savedOrder)
-  } catch (err) {
-    res.status(500).json(err)
-  }
-}
+const createOrder = factory.createOne(Order)
 
-// Update Order
-const updateOrder = async (req, res) => {
-  try {
-    const updatedOrder = await Order.findByIdAndUpdate(
-      req.params.id,
-      {
-        $set: req.body,
-      },
-      { new: true }
-    )
-    res.status(200).json(updatedOrder)
-  } catch (err) {
-    res.status(500).json({ status: 'error', err })
-  }
-}
+const updateOrder = factory.updateOne(Order)
 
-// Delete Order
-const deleteOrder = async (req, res) => {
-  try {
-    await Order.findByIdAndDelete(req.params.id)
-    res
-      .status(200)
-      .json({ status: 'success', message: 'Order has been deleted!' })
-  } catch (err) {
-    res.status(500).json({ status: 'error', err })
-  }
-}
+const deleteOrder = factory.deleteOne(Order)
 
-// Get User Orders
-const getUserOrders = async (req, res) => {
-  try {
-    const orders = await Order.find({ userId: req.params.userId })
-    res.status(200).json(orders)
-  } catch (err) {
-    res.status(500).json({ status: 'error', err })
-  }
-}
+const getUserOrders = factory.getByUserId(Order)
 
-// Get All Orders
-const getAllOrders = async (req, res) => {
-  try {
-    const orders = await Order.find()
-    res.status(200).json(orders)
-  } catch (err) {
-    res.status(500).json({ status: 'error', err })
-  }
-}
+const getAllOrders = factory.getAllBasic(Order)
 
 // Get Monthly Income
 const getMonthlyIncome = async (req, res) => {

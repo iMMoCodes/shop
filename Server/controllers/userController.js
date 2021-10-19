@@ -1,48 +1,67 @@
 const User = require('../models/User')
-const bcrypt = require('bcrypt')
+const factory = require('./handlerFactory')
 
-// Update User
-const updateUser = async (req, res) => {
-  try {
-    if (req.body.password) {
-      req.body.password = await bcrypt.hash(req.body.password, 12)
+const filterObj = (obj, ...allowedFields) => {
+  const newObject = {}
+  Object.keys(obj).forEach((el) => {
+    if (allowedFields.includes(el)) {
+      newObject[el] = obj[el]
     }
-    const updatedUser = await User.findByIdAndUpdate(
-      req.params.id,
-      {
-        $set: req.body,
-      },
-      { new: true }
+  })
+  return newObject
+}
+
+// Update Me
+const updateMe = async (req, res, next) => {
+  try {
+    if (req.body.password || req.body.passwordConfirm) {
+      return next(
+        res.status(400).json({
+          status: 'error',
+          message:
+            'This route is not for password updates. Please use /updateMyPassword',
+        })
+      )
+    }
+
+    const filteredBody = filterObj(
+      req.body,
+      'firstName',
+      'lastName',
+      'email',
+      'image'
     )
-    const { password, ...others } = updatedUser._doc
-    res.status(200).json({ ...others })
+
+    const updatedUser = await User.findByIdAndUpdate(
+      req.user._id,
+      filteredBody,
+      {
+        new: true,
+        runValidators: true,
+      }
+    )
+
+    res.status(200).json(updatedUser)
   } catch (err) {
     res.status(500).json({ status: 'error', err })
   }
 }
 
-// Delete User
-const deleteUser = async (req, res) => {
+// Delete Me
+const deleteMe = async (req, res, next) => {
   try {
-    await User.findByIdAndDelete(req.params.id)
-    res
-      .status(200)
-      .json({ status: 'success', message: 'User has been deleted!' })
+    await User.findByIdAndUpdate(req.user._id, { active: false })
+    res.status(200).json('Account deleted!')
   } catch (err) {
     res.status(500).json({ status: 'error', err })
   }
 }
 
-// Get User
-const getUser = async (req, res) => {
-  try {
-    const user = await User.findById(req.params.id)
-    const { password, ...others } = user._doc
-    res.status(200).json(...others)
-  } catch (err) {
-    res.status(500).json({ status: 'error', err })
-  }
-}
+const updateUser = factory.updateOne(User)
+
+const deleteUser = factory.deleteOne(User)
+
+const getUser = factory.getOneById(User)
 
 // Get All Users
 const getAllUsers = async (req, res) => {
@@ -53,7 +72,7 @@ const getAllUsers = async (req, res) => {
       : await User.find()
     res.status(200).json(users)
   } catch (err) {
-    res.status(500).json({ status: 'error', err })
+    res.status(404).json({ status: 'error', err })
   }
 }
 
@@ -79,8 +98,16 @@ const getUserStats = async (req, res) => {
     ])
     res.status(200).json(data)
   } catch (err) {
-    res.status(500).json({ status: 'error', err })
+    res.status(404).json({ status: 'error', err })
   }
 }
 
-module.exports = { updateUser, deleteUser, getUser, getAllUsers, getUserStats }
+module.exports = {
+  updateMe,
+  deleteMe,
+  updateUser,
+  deleteUser,
+  getUser,
+  getAllUsers,
+  getUserStats,
+}

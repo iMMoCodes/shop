@@ -5,21 +5,24 @@ const productController = require('../controllers/productController')
 // Create Product
 router.post(
   '/',
-  authController.verifyTokenAndAdmin,
+  authController.protect,
+  authController.adminOnly,
   productController.createProduct
 )
 
 // Update Product
-router.put(
+router.patch(
   '/:id',
-  authController.verifyTokenAndAdmin,
+  authController.protect,
+  authController.adminOnly,
   productController.updateProduct
 )
 
 // Delete Product
 router.delete(
   '/:id',
-  authController.verifyTokenAndAdmin,
+  authController.protect,
+  authController.adminOnly,
   productController.deleteProduct
 )
 

@@ -3,40 +3,44 @@ const authController = require('../controllers/authController')
 const orderController = require('../controllers/orderController')
 
 // Create Order
-router.post('/', authController.verifyToken, orderController.createOrder)
+router.post('/', authController.protect, orderController.createOrder)
 
 // Update Order
-router.put(
+router.patch(
   '/:id',
-  authController.verifyTokenAndAdmin,
+  authController.protect,
+  authController.adminOnly,
   orderController.updateOrder
 )
 
 // Delete Order
 router.delete(
   '/:id',
-  authController.verifyTokenAndAdmin,
+  authController.protect,
+  authController.adminOnly,
   orderController.deleteOrder
 )
 
 // Get User Orders
 router.get(
   '/find/:userId',
-  authController.verifyTokenAndAuthorize,
+  authController.protect,
   orderController.getUserOrders
 )
 
 // Get All Orders
 router.get(
   '/',
-  authController.verifyTokenAndAdmin,
+  authController.protect,
+  authController.adminOnly,
   orderController.getAllOrders
 )
 
 // Get Monthly Income
 router.get(
   '/income',
-  authController.verifyTokenAndAdmin,
+  authController.protect,
+  authController.adminOnly,
   orderController.getMonthlyIncome
 )
 

@@ -3,30 +3,23 @@ const authController = require('../controllers/authController')
 const cartController = require('../controllers/cartController')
 
 // Create Cart
-router.post('/', authController.verifyToken, cartController.createCart)
+router.post('/', cartController.createCart)
 
 // Update Cart
-router.put(
-  '/:id',
-  authController.verifyTokenAndAuthorize,
-  cartController.updateCart
-)
+router.patch('/:id', cartController.updateCart)
 
 // Delete Cart
-router.delete(
-  '/:id',
-  authController.verifyTokenAndAuthorize,
-  cartController.deleteCart
-)
+router.delete('/:id', cartController.deleteCart)
 
 // Get User Cart
-router.get(
-  '/find/:userId',
-  authController.verifyTokenAndAuthorize,
-  cartController.getUserCart
-)
+router.get('/find/:userId', authController.protect, cartController.getUserCart)
 
 // Get All Carts
-router.get('/', authController.verifyTokenAndAdmin, cartController.getAllCarts)
+router.get(
+  '/',
+  authController.protect,
+  authController.adminOnly,
+  cartController.getAllCarts
+)
 
 module.exports = router

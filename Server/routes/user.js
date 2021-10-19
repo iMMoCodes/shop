@@ -2,34 +2,49 @@ const router = require('express').Router()
 const authController = require('../controllers/authController')
 const userController = require('../controllers/userController')
 
+// Update Me
+router.patch('/updateMe', authController.protect, userController.updateMe)
+
+// Delete Me
+router.delete('/deleteMe', authController.protect, userController.deleteMe)
+
 // Update User
-router.put(
+router.patch(
   '/:id',
-  authController.verifyTokenAndAuthorize,
+  authController.protect,
+  authController.adminOnly,
   userController.updateUser
 )
 
 // Delete User
 router.delete(
   '/:id',
-  authController.verifyTokenAndAuthorize,
+  authController.protect,
+  authController.adminOnly,
   userController.deleteUser
 )
 
 // Get User
 router.get(
   '/find/:id',
-  authController.verifyTokenAndAdmin,
+  authController.protect,
+  authController.adminOnly,
   userController.getUser
 )
 
 // Get All Users
-router.get('/', authController.verifyTokenAndAdmin, userController.getAllUsers)
+router.get(
+  '/',
+  authController.protect,
+  authController.adminOnly,
+  userController.getAllUsers
+)
 
 // Get User Stats
 router.get(
   '/stats',
-  authController.verifyTokenAndAdmin,
+  authController.protect,
+  authController.adminOnly,
   userController.getUserStats
 )
 
