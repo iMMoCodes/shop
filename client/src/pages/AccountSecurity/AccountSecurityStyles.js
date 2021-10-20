@@ -69,22 +69,15 @@ export const Button = styled.button`
   font-weight: 600;
   cursor: pointer;
 `
-export const Image = styled.img`
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  object-fit: cover;
-  margin: 10px 0px 10px 20px;
+export const Divider = styled.div`
+  width: 95vw;
+  margin: 0 auto;
+  border-bottom: 1px solid #acacac;
 `
+
 export const ErrorMessage = styled.div`
   color: #a30021;
   display: flex;
   align-items: center;
   font-size: 16px;
-`
-
-export const Divider = styled.div`
-  width: 95vw;
-  margin: 0 auto;
-  border-bottom: 1px solid #acacac;
 `

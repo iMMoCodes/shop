@@ -15,6 +15,7 @@ import Success from './pages/Success/Success'
 import AccountDetails from './pages/AccountDetails/AccountDetails'
 import Wishlist from './pages/Wishlist/Wishlist'
 import Error from './pages/Error/Error'
+import AccountSecurity from './pages/AccountSecurity/AccountSecurity'
 
 const App = () => {
   const user = useSelector((state) => state.user.currentUser)
@@ -44,6 +45,9 @@ const App = () => {
         </Route>
         <Route path='/account/details'>
           {user ? <AccountDetails /> : <Redirect to='/' />}
+        </Route>
+        <Route path='/account/security'>
+          {user ? <AccountSecurity /> : <Redirect to='/' />}
         </Route>
         <Route path='/wishlist'>
           <Wishlist />

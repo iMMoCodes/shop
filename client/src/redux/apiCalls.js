@@ -5,9 +5,12 @@ import {
   registerFailure,
   registerStart,
   registerSuccess,
-  updateUserFailure,
-  updateUserStart,
-  updateUserSuccess,
+  updateMeFailure,
+  updateMeStart,
+  updateMeSuccess,
+  updateMyPasswordFailure,
+  updateMyPasswordStart,
+  updateMyPasswordSuccess,
 } from './userRedux'
 import { publicRequest, userRequest } from '../requestMethods'
 import {
@@ -16,6 +19,7 @@ import {
   getProductSuccess,
 } from './productRedux'
 
+// LOGIN
 export const login = async (dispatch, user) => {
   dispatch(loginStart())
   try {
@@ -24,10 +28,11 @@ export const login = async (dispatch, user) => {
     })
     dispatch(loginSuccess(res.data))
   } catch (err) {
-    dispatch(loginFailure(err.response.data))
+    dispatch(loginFailure(err.response?.data))
   }
 }
 
+// REGISTER
 export const register = async (dispatch, user) => {
   dispatch(registerStart())
   try {
@@ -38,18 +43,33 @@ export const register = async (dispatch, user) => {
   }
 }
 
-export const updateUser = async (dispatch, id, user, token) => {
-  dispatch(updateUserStart())
+// UPDATE OTHERS EXCEPT PASSWORD
+export const updateMe = async (dispatch, user) => {
+  dispatch(updateMeStart())
   try {
-    const res = await userRequest.put(`/users/${id}`, user, {
-      headers: { authorization: `Bearer ${token}` },
+    const res = await userRequest.patch(`/users/updateMe`, user, {
+      withCredentials: true,
     })
-    dispatch(updateUserSuccess(res.data))
+    dispatch(updateMeSuccess(res.data))
   } catch (err) {
-    dispatch(updateUserFailure())
+    dispatch(updateMeFailure(err.response?.data?.err?.errors))
   }
 }
 
+// UPDATE PASSWORD
+export const updateMyPassword = async (dispatch, password) => {
+  dispatch(updateMyPasswordStart())
+  try {
+    const res = await userRequest.patch('/auth/updateMyPassword', password, {
+      withCredentials: true,
+    })
+    dispatch(updateMyPasswordSuccess(res.data))
+  } catch (err) {
+    dispatch(updateMyPasswordFailure(err.response.data?.err))
+  }
+}
+
+// GET PRODUCTS
 export const getProducts = async (dispatch, category) => {
   dispatch(getProductStart())
   try {

@@ -40,17 +40,35 @@ const userSlice = createSlice({
       state.error = action.payload.message
       state.success = false
     },
-    updateUserStart: (state) => {
+    updateMeStart: (state) => {
       state.pending = true
+      state.success = false
     },
-    updateUserSuccess: (state, action) => {
+    updateMeSuccess: (state, action) => {
       state.pending = false
-      state.currentUser = Object.assign(state.currentUser, action.payload)
+      state.currentUser = action.payload
       state.error = false
+      state.success = true
     },
-    updateUserFailure: (state) => {
+    updateMeFailure: (state, action) => {
       state.pending = false
-      state.error = true
+      state.error = action.payload
+      state.success = false
+    },
+    updateMyPasswordStart: (state) => {
+      state.pending = true
+      state.success = false
+    },
+    updateMyPasswordSuccess: (state, action) => {
+      state.pending = false
+      state.currentUser = action.payload.user
+      state.error = false
+      state.success = true
+    },
+    updateMyPasswordFailure: (state, action) => {
+      state.pending = false
+      state.error = action.payload
+      state.success = false
     },
     logout: (state) => {
       state.pending = false
@@ -68,9 +86,12 @@ export const {
   registerStart,
   registerSuccess,
   registerFailure,
-  updateUserStart,
-  updateUserSuccess,
-  updateUserFailure,
+  updateMeStart,
+  updateMeSuccess,
+  updateMeFailure,
+  updateMyPasswordStart,
+  updateMyPasswordSuccess,
+  updateMyPasswordFailure,
   logout,
 } = userSlice.actions
 export default userSlice.reducer

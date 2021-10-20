@@ -3,10 +3,11 @@ import {
   AccountCircleOutlined,
   LibraryBooksOutlined,
   LocalMallOutlined,
-  RoomOutlined,
+  Security,
   SettingsOutlined,
 } from '@material-ui/icons'
 import { Container, Side, List, ListItem, Title } from './SidebarStyles'
+import { NavLink } from '../../AppStyles'
 
 export const Sidebar = () => {
   return (
@@ -14,14 +15,18 @@ export const Sidebar = () => {
       <Side>
         <Title>My Account</Title>
         <List>
-          <ListItem>
-            <AccountCircleOutlined style={{ marginRight: '5px' }} />
-            My Details
-          </ListItem>
-          <ListItem>
-            <RoomOutlined style={{ marginRight: '5px' }} />
-            My Address book
-          </ListItem>
+          <NavLink to='/account/details'>
+            <ListItem>
+              <AccountCircleOutlined style={{ marginRight: '5px' }} />
+              My Details
+            </ListItem>
+          </NavLink>
+          <NavLink to='/account/security'>
+            <ListItem>
+              <Security style={{ marginRight: '5px' }} />
+              Security
+            </ListItem>
+          </NavLink>
           <ListItem>
             <LocalMallOutlined style={{ marginRight: '5px' }} />
             My Orders
