@@ -18,6 +18,17 @@ import {
   getProductStart,
   getProductSuccess,
 } from './productRedux'
+import {
+  addWishStart,
+  addWishSuccess,
+  addWishFailure,
+  deleteWishStart,
+  deleteWishSuccess,
+  getWishesStart,
+  getWishesSuccess,
+  getWishesFailure,
+  deleteWishFailure,
+} from './wishRedux'
 
 // LOGIN
 export const login = async (dispatch, user) => {
@@ -79,5 +90,48 @@ export const getProducts = async (dispatch, category) => {
     dispatch(getProductSuccess(res.data))
   } catch (err) {
     dispatch(getProductFailure())
+  }
+}
+
+// ADD TO WISHLIST
+export const addWishList = async (dispatch, userId, product) => {
+  dispatch(addWishStart())
+  try {
+    await userRequest.post(
+      '/wish/',
+      { userId, product },
+      {
+        withCredentials: true,
+      }
+    )
+    dispatch(addWishSuccess())
+  } catch (err) {
+    dispatch(addWishFailure())
+  }
+}
+
+// DELETE FROM WISHLIST
+export const deleteWishList = async (dispatch, productId) => {
+  dispatch(deleteWishStart())
+  try {
+    await userRequest.delete(`/wish/${productId}`, {
+      withCredentials: true,
+    })
+    dispatch(deleteWishSuccess(productId))
+  } catch (err) {
+    dispatch(deleteWishFailure())
+  }
+}
+
+// GET WISHLIST
+export const getWishList = async (dispatch, userId) => {
+  dispatch(getWishesStart())
+  try {
+    const res = await userRequest.get(`/wish/find/${userId}`, {
+      withCredentials: true,
+    })
+    dispatch(getWishesSuccess(res.data))
+  } catch (err) {
+    dispatch(getWishesFailure())
   }
 }

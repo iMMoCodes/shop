@@ -58,7 +58,7 @@ const App = () => {
           {user ? <AccountNewsletter /> : <Redirect to='/' />}
         </Route>
         <Route path='/wishlist'>
-          <Wishlist />
+          {user ? <Wishlist /> : <Redirect to='/' />}
         </Route>
         <Route path='*'>
           <Error />

@@ -40,10 +40,11 @@ import {
   Button,
   LoginText,
 } from './CartStyles'
+import { getWishList } from '../../redux/apiCalls'
 
 const Cart = () => {
   const cart = useSelector((state) => state.cart)
-  const wish = useSelector((state) => state.wish)
+  const wish = useSelector((state) => state.wish.wishList)
   const user = useSelector((state) => state.user.currentUser)
   const [stripeToken, setStripeToken] = useState(null)
   const history = useHistory()
@@ -85,8 +86,9 @@ const Cart = () => {
         console.log(err)
       }
     }
+    user && getWishList(dispatch, user._id)
     stripeToken && makeRequest()
-  }, [stripeToken, cart.total, history, cart])
+  }, [stripeToken, cart.total, history, cart, dispatch, user])
   return (
     <Container>
       <Announcement />
@@ -98,10 +100,12 @@ const Cart = () => {
             <TopButton>Continue Shopping</TopButton>
           </NavLink>
           <TopTexts>
-            <TopText>Shopping cart ({cart.products.length})</TopText>
-            <NavLink to='/wishlist'>
-              <TopText>Your wishlist ({wish.products.length})</TopText>
-            </NavLink>
+            <TopText>Shopping cart ({cart.quantity})</TopText>
+            {user && (
+              <NavLink to='/wishlist'>
+                <TopText>Your wishlist ({wish.length})</TopText>
+              </NavLink>
+            )}
           </TopTexts>
           <TopButton type='filled' onClick={clearCart}>
             Clear Cart

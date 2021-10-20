@@ -3,17 +3,18 @@ import { FavoriteBorderOutlined, SearchOutlined } from '@material-ui/icons'
 import { BasicModal } from '../Popup/Popup'
 import { NavLink } from '../../AppStyles'
 import { Info, Container, Circle, Image, Icon } from './ProductStyles'
-import { useDispatch } from 'react-redux'
-import { addProduct } from '../../redux/wishRedux'
+import { useDispatch, useSelector } from 'react-redux'
 import Snackbar from '../Snackbar/Snackbar'
+import { addWishList } from '../../redux/apiCalls'
 
 const Product = ({ item }) => {
+  const user = useSelector((state) => state.user.currentUser)
   const dispatch = useDispatch()
   const snackbarRef = useRef(null)
 
-  const addToFavorites = (item) => {
+  const addToFavorites = (itemId) => {
     snackbarRef.current.show()
-    dispatch(addProduct(item))
+    addWishList(dispatch, user._id, itemId)
   }
 
   return (
@@ -29,7 +30,7 @@ const Product = ({ item }) => {
             <SearchOutlined />
           </NavLink>
         </Icon>
-        <Icon onClick={() => addToFavorites(item)}>
+        <Icon onClick={() => addToFavorites(item._id)}>
           <Snackbar
             message='Item added to Wishlist!'
             type='success'

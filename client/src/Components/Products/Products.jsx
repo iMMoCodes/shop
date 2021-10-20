@@ -1,17 +1,19 @@
 import { useEffect, useState } from 'react'
 import Product from '../Product/Product'
 import { useDispatch, useSelector } from 'react-redux'
-import { getProducts } from '../../redux/apiCalls'
+import { getProducts, getWishList } from '../../redux/apiCalls'
 import { Container } from './ProductsStyles'
 
 const Products = ({ category, filters, sort }) => {
   const dispatch = useDispatch()
   const products = useSelector((state) => state.product.products)
+  const user = useSelector((state) => state.user.currentUser)
   const [filteredProducts, setFilteredProducts] = useState([])
 
   useEffect(() => {
     category ? getProducts(dispatch, category) : getProducts(dispatch)
-  }, [category, dispatch])
+    user && getWishList(dispatch, user._id)
+  }, [category, dispatch, user])
 
   useEffect(() => {
     category &&

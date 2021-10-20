@@ -1,5 +1,4 @@
 import { useSelector, useDispatch } from 'react-redux'
-import { deleteProduct } from '../../redux/wishRedux'
 import { BasicModal } from '../../Components/Popup/Popup'
 import {
   Container,
@@ -20,13 +19,20 @@ import { DeleteOutline } from '@material-ui/icons'
 import Navbar from '../../Components/Navbar/Navbar'
 import Newsletter from '../../Components/Newsletter/Newsletter'
 import Footer from '../../Components/Footer/Footer'
+import { useEffect } from 'react'
+import { deleteWishList, getWishList } from '../../redux/apiCalls'
 
 const Wishlist = () => {
-  const products = useSelector((state) => state.wish.products)
+  const products = useSelector((state) => state.wish.wishList)
+  const user = useSelector((state) => state.user.currentUser)
   const dispatch = useDispatch()
 
+  useEffect(() => {
+    getWishList(dispatch, user._id)
+  }, [dispatch, user._id])
+
   const handleRemove = (id) => {
-    dispatch(deleteProduct(id))
+    deleteWishList(dispatch, id)
   }
 
   return (
@@ -46,14 +52,16 @@ const Wishlist = () => {
           {products.map((item, index) => (
             <Tr key={index}>
               <Product>
-                <Image src={item.image} alt='Product image' />
-                <Name>{item.title}</Name>
+                <Image src={item.product.image} alt='Product image' />
+                <Name>{item.product.title}</Name>
               </Product>
-              <Price>{item.price} €</Price>
-              <Stock>{item.inStock ? 'In stock' : 'Not in stock'}</Stock>
+              <Price>{item.product.price} €</Price>
+              <Stock>
+                {item.product.inStock ? 'In stock' : 'Not in stock'}
+              </Stock>
               <Buttons>
                 <Add>
-                  <BasicModal item={item} iconColor='#4aa83f' />
+                  <BasicModal item={item.product} iconColor='#4aa83f' />
                 </Add>
                 <Delete onClick={() => handleRemove(item._id)}>
                   <DeleteOutline style={{ color: '#e43838' }} />
