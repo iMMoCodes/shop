@@ -38,8 +38,6 @@ const AccountOrders = () => {
     return <Btn txt={type}>{type}</Btn>
   }
 
-  console.log(orders)
-
   useEffect(() => {
     getOrders()
   }, [getOrders])
@@ -64,17 +62,15 @@ const AccountOrders = () => {
                 </Tr>
               </thead>
               <tbody>
-                {orders.map((order) => (
-                  <>
-                    <Tr>
-                      <OrderId>{order._id}</OrderId>
-                      <Date>{order.createdAt.substring(0, 10)}</Date>
-                      <Amount>{order.amount} €</Amount>
-                      <Status>
-                        <Button type={order.status}></Button>
-                      </Status>
-                    </Tr>
-                  </>
+                {orders.map((order, index) => (
+                  <Tr key={index}>
+                    <OrderId>{order._id}</OrderId>
+                    <Date>{order.createdAt.substring(0, 10)}</Date>
+                    <Amount>{order.amount} €</Amount>
+                    <Status>
+                      <Button type={order.status}></Button>
+                    </Status>
+                  </Tr>
                 ))}
               </tbody>
             </Table>
