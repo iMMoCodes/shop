@@ -14,6 +14,7 @@ const productRoute = require('./routes/product')
 const cartRoute = require('./routes/cart')
 const orderRoute = require('./routes/order')
 const stripeRoute = require('./routes/stripe')
+const wishRoute = require('./routes/wish')
 
 const app = express()
 
@@ -56,6 +57,7 @@ app.use('/api/v1/products', productRoute)
 app.use('/api/v1/carts', cartRoute)
 app.use('/api/v1/orders', orderRoute)
 app.use('/api/v1/checkout', stripeRoute)
+app.use('/api/v1/wish', wishRoute)
 app.all('*', (req, res) => {
   res.status(404).json({
     status: 'error',
