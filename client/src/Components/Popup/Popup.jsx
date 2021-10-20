@@ -75,7 +75,7 @@ export const BasicModal = ({ item, iconColor }) => {
           <Title>{item.title}</Title>
           <Image src={item.image} alt='product' />
           <FilterContainer>
-            {item.color.length >= 1 && (
+            {item.color?.length >= 1 && (
               <Filter>
                 <FilterTitle>Color:</FilterTitle>
                 {item.color.map((c) => (
@@ -83,7 +83,7 @@ export const BasicModal = ({ item, iconColor }) => {
                 ))}
               </Filter>
             )}
-            {item.size.length >= 1 && (
+            {item.size?.length >= 1 && (
               <Filter>
                 <FilterTitle>Size:</FilterTitle>
                 <FilterSize onChange={(e) => setSize(e.target.value)}>
