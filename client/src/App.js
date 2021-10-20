@@ -16,6 +16,8 @@ import AccountDetails from './pages/AccountDetails/AccountDetails'
 import Wishlist from './pages/Wishlist/Wishlist'
 import Error from './pages/Error/Error'
 import AccountSecurity from './pages/AccountSecurity/AccountSecurity'
+import AccountOrders from './pages/AccountOrders/AccountOrders'
+import AccountNewsletter from './pages/AccountNewsletter/AccountNewsletter'
 
 const App = () => {
   const user = useSelector((state) => state.user.currentUser)
@@ -48,6 +50,12 @@ const App = () => {
         </Route>
         <Route path='/account/security'>
           {user ? <AccountSecurity /> : <Redirect to='/' />}
+        </Route>
+        <Route path='/account/orders'>
+          {user ? <AccountOrders /> : <Redirect to='/' />}
+        </Route>
+        <Route path='/account/newsletter'>
+          {user ? <AccountNewsletter /> : <Redirect to='/' />}
         </Route>
         <Route path='/wishlist'>
           <Wishlist />

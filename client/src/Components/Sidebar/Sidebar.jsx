@@ -4,7 +4,6 @@ import {
   LibraryBooksOutlined,
   LocalMallOutlined,
   Security,
-  SettingsOutlined,
 } from '@material-ui/icons'
 import { Container, Side, List, ListItem, Title } from './SidebarStyles'
 import { NavLink } from '../../AppStyles'
@@ -27,18 +26,18 @@ export const Sidebar = () => {
               Security
             </ListItem>
           </NavLink>
-          <ListItem>
-            <LocalMallOutlined style={{ marginRight: '5px' }} />
-            My Orders
-          </ListItem>
-          <ListItem>
-            <LibraryBooksOutlined style={{ marginRight: '5px' }} />
-            My Newsletter
-          </ListItem>
-          <ListItem>
-            <SettingsOutlined style={{ marginRight: '5px' }} />
-            Account Settings
-          </ListItem>
+          <NavLink to='/account/orders'>
+            <ListItem>
+              <LocalMallOutlined style={{ marginRight: '5px' }} />
+              My Orders
+            </ListItem>
+          </NavLink>
+          <NavLink to='/account/newsletter'>
+            <ListItem>
+              <LibraryBooksOutlined style={{ marginRight: '5px' }} />
+              My Newsletter
+            </ListItem>
+          </NavLink>
         </List>
       </Side>
     </Container>

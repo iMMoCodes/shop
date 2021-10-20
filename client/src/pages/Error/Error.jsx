@@ -9,7 +9,10 @@ const Error = () => {
       <SentimentVeryDissatisfied
         style={{ color: 'yellow', fontSize: '250px' }}
       />
-      <Title>Oops! Looks like this page doesn't exist.</Title>
+      <Title>
+        Oops! Looks like this page doesn't exist or haven't been implemented
+        yet.
+      </Title>
       <NavLink to='/'>Go back to homepage</NavLink>
     </Container>
   )
