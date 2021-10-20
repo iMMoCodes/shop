@@ -33,8 +33,6 @@ const Register = () => {
   const error = useSelector((state) => state.user.error?.err?.errors)
   const err = useSelector((state) => state.user.error?.err)
   const status = useSelector((state) => state.user.success)
-  console.log(error)
-  console.log(err)
 
   useEffect(() => {
     if (status) {

@@ -71,13 +71,15 @@ const Footer = () => {
           </ListItem>
           {user && (
             <>
-              <NavLink to='/account/details'>
-                <ListItem>Account</ListItem>
-              </NavLink>
-              <ListItem>Order Tracking</ListItem>
-              <NavLink to='/wishlist'>
-                <ListItem>Wishlist</ListItem>
-              </NavLink>
+              <ListItem>
+                <NavLink to='/account/details'>Account</NavLink>
+              </ListItem>
+              <ListItem>
+                <NavLink to='/account/orders'>Order Tracking</NavLink>
+              </ListItem>
+              <ListItem>
+                <NavLink to='/wishlist'>Wishlist</NavLink>
+              </ListItem>
             </>
           )}
           <ListItem>Terms</ListItem>
