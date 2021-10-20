@@ -7,7 +7,7 @@ const updateOrder = factory.updateOne(Order)
 
 const deleteOrder = factory.deleteOne(Order)
 
-const getUserOrders = factory.getByUserId(Order)
+const getUserOrders = factory.getByUserId(Order, { path: 'product' })
 
 const getAllOrders = factory.getAllBasic(Order)
 

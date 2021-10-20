@@ -42,9 +42,11 @@ const createOne = (Model) => async (req, res) => {
 }
 
 // Get One by ID
-const getOneById = (Model) => async (req, res) => {
+const getOneById = (Model, popOptions) => async (req, res) => {
   try {
-    const doc = await Model.findById(req.params.id)
+    let query = await Model.findById(req.params.id)
+    if (popOptions) query = query.populate(popOptions)
+    const doc = await query
 
     if (!doc) {
       return next(res.status(404).json('No document found with that ID'))
@@ -56,10 +58,12 @@ const getOneById = (Model) => async (req, res) => {
   }
 }
 
-// Get One by user ID
-const getByUserId = (Model) => async (req, res) => {
+// Get by user ID
+const getByUserId = (Model, popOptions) => async (req, res) => {
   try {
-    const doc = await Model.find({ userId: req.params.userId })
+    let query = Model.find({ userId: req.params.userId })
+    if (popOptions) query = query.populate(popOptions)
+    const doc = await query
 
     if (!doc) {
       return next(res.status(404).json('No document found with that ID'))
