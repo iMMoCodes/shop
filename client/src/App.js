@@ -18,6 +18,7 @@ import Error from './pages/Error/Error'
 import AccountSecurity from './pages/AccountSecurity/AccountSecurity'
 import AccountOrders from './pages/AccountOrders/AccountOrders'
 import AccountNewsletter from './pages/AccountNewsletter/AccountNewsletter'
+import Purchase from './pages/Purchase/Purchase'
 
 const App = () => {
   const user = useSelector((state) => state.user.currentUser)
@@ -35,9 +36,6 @@ const App = () => {
         </Route>
         <Route path='/cart'>
           <Cart />
-        </Route>
-        <Route path='/success'>
-          <Success />
         </Route>
         <Route path='/login'>
           <Login />
@@ -59,6 +57,12 @@ const App = () => {
         </Route>
         <Route path='/wishlist'>
           {user ? <Wishlist /> : <Redirect to='/' />}
+        </Route>
+        <Route path='/success'>
+          <Success />
+        </Route>
+        <Route path='/purchase'>
+          <Purchase />
         </Route>
         <Route path='*'>
           <Error />
