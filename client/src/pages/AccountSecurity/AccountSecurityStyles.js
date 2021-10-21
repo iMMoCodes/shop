@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { tablet, mobile } from '../../responsive'
 
 export const Container = styled.div`
   display: flex;
@@ -8,10 +9,12 @@ export const Wrapper = styled.div`
   display: flex;
   width: 90%;
   margin: 0 auto;
+  ${mobile({ flexDirection: 'column' })}
 `
 export const Right = styled.div`
   flex: 5;
   margin: 150px 0px 0px 150px;
+  ${tablet({ margin: '20px 0px 0px 20px' })}
 `
 export const Title = styled.h1``
 export const Subtitle = styled.h3`
@@ -22,6 +25,7 @@ export const Subtitle = styled.h3`
 export const Info = styled.div`
   display: flex;
   padding: 20px;
+  ${tablet({ flexDirection: 'column' })}
 `
 export const InfoText = styled.span`
   flex: 30%;
@@ -42,6 +46,7 @@ export const FormItem = styled.div`
 export const Label = styled.label`
   font-weight: 600;
   margin-bottom: 10px;
+  ${mobile({ marginLeft: '-42px' })}
 `
 export const Input = styled.input`
   height: 30px;
@@ -52,6 +57,7 @@ export const Input = styled.input`
   &:focus {
     outline: none;
   }
+  ${mobile({ marginLeft: '-45px' })}
 `
 export const ButtonDiv = styled.div`
   display: flex;

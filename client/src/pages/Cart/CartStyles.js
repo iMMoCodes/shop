@@ -4,7 +4,7 @@ import { mobile, tablet } from '../../responsive'
 export const Container = styled.div``
 export const Wrapper = styled.div`
   padding: 20px;
-  ${mobile({ padding: '10px' })}
+  ${tablet({ padding: '10px' })}
 `
 export const Title = styled.h1`
   font-weight: 300;

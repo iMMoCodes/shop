@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { tablet, mobile } from '../../responsive'
 
 export const Container = styled.div`
   display: flex;
@@ -8,10 +9,12 @@ export const Wrapper = styled.div`
   display: flex;
   width: 90%;
   margin: 0 auto;
+  ${mobile({ flexDirection: 'column' })}
 `
 export const Right = styled.div`
   flex: 5;
   margin: 150px 0px 0px 150px;
+  ${tablet({ margin: '20px 0px 0px 20px' })}
 `
 export const Title = styled.h1``
 export const SubTitle = styled.h3`
@@ -20,13 +23,16 @@ export const SubTitle = styled.h3`
 export const Table = styled.table`
   width: 100%;
   border-spacing: 20px;
+  ${tablet({ borderSpacing: '10px' })};
 `
 export const Tr = styled.tr``
 export const Th = styled.th`
   width: 25%;
   text-align: start;
 `
-export const OrderId = styled.td``
+export const OrderId = styled.td`
+  ${mobile({ wordBreak: 'break-all' })}
+`
 export const Date = styled.td``
 export const Amount = styled.td``
 export const Status = styled.td``
