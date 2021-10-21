@@ -19,11 +19,13 @@ import AccountSecurity from './pages/AccountSecurity/AccountSecurity'
 import AccountOrders from './pages/AccountOrders/AccountOrders'
 import AccountNewsletter from './pages/AccountNewsletter/AccountNewsletter'
 import Purchase from './pages/Purchase/Purchase'
+import ScrollToTop from './Components/ScrollToTop/ScrollToTop'
 
 const App = () => {
   const user = useSelector((state) => state.user.currentUser)
   return (
     <Router>
+      <ScrollToTop />
       <Switch>
         <Route path='/' exact>
           <Home />
