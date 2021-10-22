@@ -2,6 +2,9 @@ const router = require('express').Router()
 const authController = require('../controllers/authController')
 const userController = require('../controllers/userController')
 
+// Send newsletter
+router.post('/newsletter/', userController.sendNewsLetter)
+
 // Update Me
 router.patch('/updateMe', authController.protect, userController.updateMe)
 

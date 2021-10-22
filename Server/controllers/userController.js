@@ -1,5 +1,6 @@
 const User = require('../models/User')
 const factory = require('./handlerFactory')
+const publicEmail = require('../utils/email')
 
 const filterObj = (obj, ...allowedFields) => {
   const newObject = {}
@@ -9,6 +10,16 @@ const filterObj = (obj, ...allowedFields) => {
     }
   })
   return newObject
+}
+
+// Send Newsletter
+const sendNewsLetter = async (req, res) => {
+  try {
+    // await new publicEmail(req.body.email).sendNewsletter()
+    return res.status(200).json('Email sent!')
+  } catch (err) {
+    return res.status(500).json({ status: 'error', err })
+  }
 }
 
 // Update Me
@@ -103,6 +114,7 @@ const getUserStats = async (req, res) => {
 }
 
 module.exports = {
+  sendNewsLetter,
   updateMe,
   deleteMe,
   updateUser,
