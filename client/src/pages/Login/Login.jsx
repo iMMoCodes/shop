@@ -40,6 +40,8 @@ const Login = () => {
         <Form>
           <Label>Email</Label>
           <Input
+            type='email'
+            name='email'
             placeholder='email@example.com'
             onChange={(e) => setEmail(e.target.value)}
           />
@@ -47,13 +49,14 @@ const Login = () => {
           <Input
             placeholder='password'
             type='password'
+            name='password'
             onChange={(e) => setPassword(e.target.value)}
           />
           <Button onClick={handleClick} disabled={pending}>
             Login
           </Button>
           {error && <Error>{error}</Error>}
-          <LoginLink to='/'>Forgot password?</LoginLink>
+          <LoginLink to='/forgotPassword'>Forgot password?</LoginLink>
           <LoginLink to='/register' onClick={() => dispatch(logout())}>
             Create new Account
           </LoginLink>

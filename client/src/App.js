@@ -20,6 +20,8 @@ import AccountOrders from './pages/AccountOrders/AccountOrders'
 import AccountNewsletter from './pages/AccountNewsletter/AccountNewsletter'
 import Purchase from './pages/Purchase/Purchase'
 import ScrollToTop from './ScrollToTop'
+import ForgotPassword from './pages/ForgotPassword/ForgotPassword'
+import PasswordReset from './pages/PasswordReset/PasswordReset'
 
 const App = () => {
   const user = useSelector((state) => state.user.currentUser)
@@ -65,6 +67,12 @@ const App = () => {
         </Route>
         <Route path='/purchase'>
           <Purchase />
+        </Route>
+        <Route path='/forgotPassword'>
+          <ForgotPassword />
+        </Route>
+        <Route path='/resetPassword/:token'>
+          <PasswordReset />
         </Route>
         <Route path='*'>
           <Error />

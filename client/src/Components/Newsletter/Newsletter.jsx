@@ -1,3 +1,5 @@
+// import { useState } from 'react'
+// import { publicRequest } from '../../requestMethods'
 import { Send } from '@material-ui/icons'
 import {
   Container,
@@ -9,6 +11,17 @@ import {
 } from './NewsletterStyles'
 
 const Newsletter = () => {
+  // const [email, setEmail] = useState('')
+
+  // const handleClick = async (e) => {
+  //   e.preventDefault()
+  //   try {
+  //     await publicRequest.post('/users/newsletter', { email })
+  //   } catch (err) {
+  //     console.log(err)
+  //   }
+  // }
+
   return (
     <Container>
       <Title>Newsletter</Title>
@@ -16,8 +29,14 @@ const Newsletter = () => {
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus, dolores.
       </Description>
       <InputContainer>
-        <Input placeholder='example@email.com' />
+        <Input
+          type='email'
+          name='email'
+          placeholder='example@email.com'
+          // onChange={(e) => setEmail(e.target.value)}
+        />
         <Button>
+          {/* <Send onClick={handleClick} /> */}
           <Send />
         </Button>
       </InputContainer>
