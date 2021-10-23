@@ -8,6 +8,7 @@ const mongoSanitize = require('express-mongo-sanitize')
 const xss = require('xss-clean')
 const hpp = require('hpp')
 const cookieParser = require('cookie-parser')
+const compression = require('compression')
 const userRoute = require('./routes/user')
 const authRoute = require('./routes/auth')
 const productRoute = require('./routes/product')
@@ -31,7 +32,7 @@ app.use('/api', limiter)
 // Cross-origin resource sharing
 app.use(
   cors({
-    origin: 'http://localhost:3000',
+    origin: ['https://immostore.netlify.app', 'http://localhost:3000'],
     credentials: true,
   })
 )
@@ -44,11 +45,13 @@ app.use(mongoSanitize())
 // Data sanitization against XSS
 app.use(xss())
 // Prevent parameter pollution
+app.use(hpp())
 // app.use(
 //   hpp({
 //     whitelist: [''],
 //   })
 // )
+app.use(compression())
 
 // ROUTES
 app.use('/api/v1/auth', authRoute)

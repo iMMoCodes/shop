@@ -15,7 +15,7 @@ const filterObj = (obj, ...allowedFields) => {
 // Send Newsletter
 const sendNewsLetter = async (req, res) => {
   try {
-    // await new publicEmail(req.body.email).sendNewsletter()
+    await new publicEmail(req.body.email).sendNewsletter()
     return res.status(200).json('Email sent!')
   } catch (err) {
     return res.status(500).json({ status: 'error', err })
