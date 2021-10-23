@@ -1,10 +1,10 @@
-import { ArrowUpward } from '@material-ui/icons'
-import React, { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import Footer from '../../Components/Footer/Footer'
-import Navbar from '../../Components/Navbar/Navbar'
-import { Sidebar } from '../../Components/Sidebar/Sidebar'
-import { updateMyPassword } from '../../redux/apiCalls'
+import { ArrowUpward } from '@material-ui/icons';
+import React, { forwardRef, useEffect, useRef, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import Footer from '../../Components/Footer/Footer';
+import Navbar from '../../Components/Navbar/Navbar';
+import { Sidebar } from '../../Components/Sidebar/Sidebar';
+import { updateMyPassword } from '../../redux/apiCalls';
 import {
   Button,
   ButtonDiv,
@@ -21,24 +21,47 @@ import {
   Subtitle,
   Title,
   Wrapper,
-} from './AccountSecurityStyles'
+} from './AccountSecurityStyles';
+import MuiAlert from '@mui/material/Alert';
+import { Snackbar } from '@mui/material';
 
 const AccountSecurity = () => {
-  const [inputs, setInputs] = useState({})
-  const dispatch = useDispatch()
-  const error = useSelector((state) => state.user?.error?.errors)
+  const [inputs, setInputs] = useState({});
+  const [open, setOpen] = useState(false);
+  const dispatch = useDispatch();
+  const error = useSelector((state) => state.user?.error);
+  const success = useSelector((state) => state.user.success);
+  const firstUpdate = useRef(true);
 
   const handleChange = (e) => {
     setInputs((prev) => {
-      return { ...prev, [e.target.name]: e.target.value }
-    })
-  }
+      return { ...prev, [e.target.name]: e.target.value };
+    });
+  };
+
+  const Alert = forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant='filled' {...props} />;
+  });
+
+  const handleClose = (reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpen(false);
+  };
 
   const handleClick = (e) => {
-    e.preventDefault()
-    updateMyPassword(dispatch, { ...inputs })
-    setInputs({})
-  }
+    e.preventDefault();
+    updateMyPassword(dispatch, { ...inputs });
+  };
+
+  useEffect(() => {
+    if (firstUpdate.current) {
+      firstUpdate.current = false;
+      return;
+    }
+    success && setOpen(true);
+  }, [success]);
 
   return (
     <Container>
@@ -63,6 +86,12 @@ const AccountSecurity = () => {
                   name='passwordCurrent'
                   onChange={handleChange}
                 />
+                {error?.message && (
+                  <ErrorMessage>
+                    <ArrowUpward />
+                    {error?.message}
+                  </ErrorMessage>
+                )}
               </FormItem>
               <FormItem>
                 <Label>New Password</Label>
@@ -72,7 +101,7 @@ const AccountSecurity = () => {
                   name='password'
                   onChange={handleChange}
                 />
-                {error?.password && (
+                {error?.err?.errors?.password && (
                   <ErrorMessage>
                     <ArrowUpward />
                     Password needs to be atleast 8 characters.
@@ -87,7 +116,7 @@ const AccountSecurity = () => {
                   name='passwordConfirm'
                   onChange={handleChange}
                 />
-                {error?.passwordConfirm && (
+                {error?.err?.errors?.passwordConfirm && (
                   <ErrorMessage>
                     <ArrowUpward />
                     Passwords don't match
@@ -100,13 +129,22 @@ const AccountSecurity = () => {
             <Button extraMargin onClick={handleClick}>
               Update
             </Button>
+            <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+              <Alert
+                onClose={handleClose}
+                severity='success'
+                sx={{ width: '100%' }}
+              >
+                Password updated succesfully!
+              </Alert>
+            </Snackbar>
           </ButtonDiv>
         </Right>
       </Wrapper>
       <Divider />
       <Footer />
     </Container>
-  )
-}
+  );
+};
 
-export default AccountSecurity
+export default AccountSecurity;

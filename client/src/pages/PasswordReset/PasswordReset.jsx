@@ -27,10 +27,16 @@ const PasswordReset = () => {
   const handleClick = async (e) => {
     e.preventDefault()
     try {
-      const res = await userRequest.patch(`/auth/resetPassword/${id}`, {
-        password,
-        passwordConfirm,
-      })
+      const res = await userRequest.patch(
+        `/auth/resetPassword/${id}`,
+        {
+          password,
+          passwordConfirm,
+        },
+        {
+          withCredentials: true,
+        }
+      )
       if (res.data.status === 'success') {
         setError('success')
         setTimeout(() => {

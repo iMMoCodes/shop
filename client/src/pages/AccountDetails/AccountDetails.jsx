@@ -1,16 +1,16 @@
-import React, { useState, useRef } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import React, { useState, useRef, forwardRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   getStorage,
   ref,
   uploadBytesResumable,
   getDownloadURL,
-} from 'firebase/storage'
-import app from '../../firebase'
-import Navbar from '../../Components/Navbar/Navbar'
-import Footer from '../../Components/Footer/Footer'
-import { Sidebar } from '../../Components/Sidebar/Sidebar'
-import { updateMe } from '../../redux/apiCalls'
+} from 'firebase/storage';
+import app from '../../firebase';
+import Navbar from '../../Components/Navbar/Navbar';
+import Footer from '../../Components/Footer/Footer';
+import { Sidebar } from '../../Components/Sidebar/Sidebar';
+import { updateMe } from '../../redux/apiCalls';
 import {
   Button,
   ButtonDiv,
@@ -28,32 +28,46 @@ import {
   Subtitle,
   Title,
   Wrapper,
-} from './AccountDetailsStyles'
-import { ArrowUpward } from '@material-ui/icons'
+} from './AccountDetailsStyles';
+import { ArrowUpward } from '@material-ui/icons';
+import MuiAlert from '@mui/material/Alert';
+import { Snackbar } from '@mui/material';
 
 const AccountDetails = () => {
-  const [inputs, setInputs] = useState({})
-  const [file, setFile] = useState(null)
-  const dispatch = useDispatch()
-  const firstNameRef = useRef(null)
-  const lastNameRef = useRef(null)
-  const emailRef = useRef(null)
-  const user = useSelector((state) => state.user.currentUser)
-  const emailError = useSelector((state) => state.user?.error?.email)
+  const [inputs, setInputs] = useState({});
+  const [file, setFile] = useState(null);
+  const [open, setOpen] = useState(false);
+  const dispatch = useDispatch();
+  const firstNameRef = useRef(null);
+  const lastNameRef = useRef(null);
+  const emailRef = useRef(null);
+  const user = useSelector((state) => state.user.currentUser);
+  const emailError = useSelector((state) => state.user?.error?.email);
 
   const handleChange = (e) => {
     setInputs((prev) => {
-      return { ...prev, [e.target.name]: e.target.value }
-    })
-  }
+      return { ...prev, [e.target.name]: e.target.value };
+    });
+  };
+
+  const Alert = forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant='filled' {...props} />;
+  });
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpen(false);
+  };
 
   const handleClick = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     if (file) {
-      const fileName = new Date().getTime() + file.name
-      const storage = getStorage(app)
-      const storageRef = ref(storage, fileName)
-      const uploadTask = uploadBytesResumable(storageRef, file)
+      const fileName = new Date().getTime() + file.name;
+      const storage = getStorage(app);
+      const storageRef = ref(storage, fileName);
+      const uploadTask = uploadBytesResumable(storageRef, file);
 
       // Register three observers:
       // 1. 'state_changed' observer, called any time the state changes
@@ -65,15 +79,15 @@ const AccountDetails = () => {
           // Observe state change events such as progress, pause, and resume
           // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
           const progress =
-            (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-          console.log('Upload is ' + progress + '% done')
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          console.log('Upload is ' + progress + '% done');
           switch (snapshot.state) {
             case 'paused':
-              console.log('Upload is paused')
-              break
+              console.log('Upload is paused');
+              break;
             case 'running':
-              console.log('Upload is running')
-              break
+              console.log('Upload is running');
+              break;
             default:
           }
         },
@@ -84,19 +98,21 @@ const AccountDetails = () => {
           // Handle successful uploads on complete
           // For instance, get the download URL: https://firebasestorage.googleapis.com/...
           getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-            const updatedUser = { ...inputs, image: downloadURL }
-            updateMe(dispatch, updatedUser)
-          })
+            const updatedUser = { ...inputs, image: downloadURL };
+            updateMe(dispatch, updatedUser);
+            setOpen(true);
+          });
         }
-      )
+      );
     } else {
-      updateMe(dispatch, { ...inputs })
+      updateMe(dispatch, { ...inputs });
+      setOpen(true);
     }
-    firstNameRef.current.value = null
-    lastNameRef.current.value = null
-    emailRef.current.value = null
-    setInputs({})
-  }
+    firstNameRef.current.value = null;
+    lastNameRef.current.value = null;
+    emailRef.current.value = null;
+    setInputs({});
+  };
 
   return (
     <>
@@ -150,6 +166,19 @@ const AccountDetails = () => {
             </Info>
             <ButtonDiv>
               <Button onClick={handleClick}>Update</Button>
+              <Snackbar
+                open={open}
+                autoHideDuration={6000}
+                onClose={handleClose}
+              >
+                <Alert
+                  onClose={handleClose}
+                  severity='success'
+                  sx={{ width: '100%' }}
+                >
+                  Profile updated succesfully!
+                </Alert>
+              </Snackbar>
             </ButtonDiv>
             <Subtitle>Email Address</Subtitle>
             <Info>
@@ -181,6 +210,19 @@ const AccountDetails = () => {
               <Button onClick={handleClick} extraMargin>
                 Update
               </Button>
+              <Snackbar
+                open={open}
+                autoHideDuration={6000}
+                onClose={handleClose}
+              >
+                <Alert
+                  onClose={handleClose}
+                  severity='success'
+                  sx={{ width: '100%' }}
+                >
+                  Profile updated succesfully!
+                </Alert>
+              </Snackbar>
             </ButtonDiv>
           </Right>
         </Wrapper>
@@ -188,7 +230,7 @@ const AccountDetails = () => {
         <Footer />
       </Container>
     </>
-  )
-}
+  );
+};
 
-export default AccountDetails
+export default AccountDetails;

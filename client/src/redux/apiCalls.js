@@ -11,13 +11,13 @@ import {
   updateMyPasswordFailure,
   updateMyPasswordStart,
   updateMyPasswordSuccess,
-} from './userRedux'
-import { publicRequest, userRequest } from '../requestMethods'
+} from './userRedux';
+import { publicRequest, userRequest } from '../requestMethods';
 import {
   getProductFailure,
   getProductStart,
   getProductSuccess,
-} from './productRedux'
+} from './productRedux';
 import {
   addWishStart,
   addWishSuccess,
@@ -28,74 +28,76 @@ import {
   getWishesSuccess,
   getWishesFailure,
   deleteWishFailure,
-} from './wishRedux'
+} from './wishRedux';
 
 // LOGIN
 export const login = async (dispatch, user) => {
-  dispatch(loginStart())
+  dispatch(loginStart());
   try {
     const res = await publicRequest.post('/auth/login', user, {
       withCredentials: true,
-    })
-    dispatch(loginSuccess(res.data))
+    });
+    dispatch(loginSuccess(res.data));
   } catch (err) {
-    dispatch(loginFailure(err.response?.data))
+    dispatch(loginFailure(err.response?.data));
   }
-}
+};
 
 // REGISTER
 export const register = async (dispatch, user) => {
-  dispatch(registerStart())
+  dispatch(registerStart());
   try {
-    await publicRequest.post('/auth/register', user)
-    dispatch(registerSuccess())
+    await publicRequest.post('/auth/register', user, {
+      withCredentials: true,
+    });
+    dispatch(registerSuccess());
   } catch (err) {
-    dispatch(registerFailure(err.response?.data))
+    dispatch(registerFailure(err.response?.data));
   }
-}
+};
 
 // UPDATE OTHERS EXCEPT PASSWORD
 export const updateMe = async (dispatch, user) => {
-  dispatch(updateMeStart())
+  dispatch(updateMeStart());
   try {
     const res = await userRequest.patch(`/users/updateMe`, user, {
       withCredentials: true,
-    })
-    dispatch(updateMeSuccess(res.data))
+    });
+    dispatch(updateMeSuccess(res.data));
   } catch (err) {
-    dispatch(updateMeFailure(err.response?.data?.err?.errors))
+    dispatch(updateMeFailure(err.response?.data?.err?.errors));
   }
-}
+};
 
 // UPDATE PASSWORD
 export const updateMyPassword = async (dispatch, password) => {
-  dispatch(updateMyPasswordStart())
+  dispatch(updateMyPasswordStart());
   try {
     const res = await userRequest.patch('/auth/updateMyPassword', password, {
       withCredentials: true,
-    })
-    dispatch(updateMyPasswordSuccess(res.data))
+    });
+    dispatch(updateMyPasswordSuccess(res.data));
   } catch (err) {
-    dispatch(updateMyPasswordFailure(err.response.data?.err))
+    dispatch(updateMyPasswordFailure(err.response.data));
   }
-}
+};
 
 // GET PRODUCTS
 export const getProducts = async (dispatch, category) => {
-  dispatch(getProductStart())
+  dispatch(getProductStart());
   try {
     const res = category
       ? await publicRequest.get(`/products?category=${category}`)
-      : await publicRequest.get('/products')
-    dispatch(getProductSuccess(res.data))
+      : await publicRequest.get('/products');
+    dispatch(getProductSuccess(res.data));
   } catch (err) {
-    dispatch(getProductFailure())
+    dispatch(getProductFailure());
   }
-}
+};
 
 // ADD TO WISHLIST
 export const addWishList = async (dispatch, userId, product) => {
-  dispatch(addWishStart())
+  dispatch(addWishStart());
   try {
     await userRequest.post(
       '/wish/',
@@ -103,35 +105,35 @@ export const addWishList = async (dispatch, userId, product) => {
       {
         withCredentials: true,
       }
-    )
-    dispatch(addWishSuccess())
+    );
+    dispatch(addWishSuccess());
   } catch (err) {
-    dispatch(addWishFailure())
+    dispatch(addWishFailure());
   }
-}
+};
 
 // DELETE FROM WISHLIST
 export const deleteWishList = async (dispatch, productId) => {
-  dispatch(deleteWishStart())
+  dispatch(deleteWishStart());
   try {
     await userRequest.delete(`/wish/${productId}`, {
       withCredentials: true,
-    })
-    dispatch(deleteWishSuccess(productId))
+    });
+    dispatch(deleteWishSuccess(productId));
   } catch (err) {
-    dispatch(deleteWishFailure())
+    dispatch(deleteWishFailure());
   }
-}
+};
 
 // GET WISHLIST
 export const getWishList = async (dispatch, userId) => {
-  dispatch(getWishesStart())
+  dispatch(getWishesStart());
   try {
     const res = await userRequest.get(`/wish/find/${userId}`, {
       withCredentials: true,
-    })
-    dispatch(getWishesSuccess(res.data))
+    });
+    dispatch(getWishesSuccess(res.data));
   } catch (err) {
-    dispatch(getWishesFailure())
+    dispatch(getWishesFailure());
   }
-}
+};

@@ -1,7 +1,7 @@
-import React from 'react'
-import { useState } from 'react'
-import { NavLink } from '../../AppStyles'
-import { publicRequest } from '../../requestMethods'
+import React from 'react';
+import { useState } from 'react';
+import { NavLink } from '../../AppStyles';
+import { publicRequest } from '../../requestMethods';
 import {
   Container,
   Wrapper,
@@ -11,21 +11,27 @@ import {
   Input,
   Button,
   SubTitle,
-} from './ForgotPasswordStyles'
+} from './ForgotPasswordStyles';
 
 const ForgotPassword = () => {
-  const [email, setEmail] = useState('')
-  const [resetSent, setResetSent] = useState(false)
+  const [email, setEmail] = useState('');
+  const [resetSent, setResetSent] = useState(false);
 
   const handleClick = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
     try {
-      await publicRequest.post('/auth/forgotPassword', { email })
-      setResetSent(true)
+      await publicRequest.post(
+        '/auth/forgotPassword',
+        { email },
+        {
+          withCredentials: true,
+        }
+      );
+      setResetSent(true);
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
-  }
+  };
 
   return (
     <Container>
@@ -54,7 +60,7 @@ const ForgotPassword = () => {
         </Form>
       </Wrapper>
     </Container>
-  )
-}
+  );
+};
 
-export default ForgotPassword
+export default ForgotPassword;

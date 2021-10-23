@@ -29,24 +29,6 @@ export const SwitchTextDiv = styled.div`
   align-items: center;
 `
 export const SwitchText = styled.span``
-export const Subtitle = styled.h3`
-  margin-top: 30px;
-  line-height: 40px;
-  border-bottom: 1px solid #acacac;
-`
-export const NewsLetterDiv = styled.div`
-  width: 70%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 0 auto;
-  ${mobile({ width: '90%' })}
-`
-export const NewsLetterTitle = styled.h1`
-  text-align: center;
-  margin-bottom: 20px;
-`
-export const NewsLetterText = styled.span``
 export const Divider = styled.div`
   width: 95vw;
   margin: 0 auto;
