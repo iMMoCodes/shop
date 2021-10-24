@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
-import { addProduct } from '../../redux/cartRedux'
-import Box from '@mui/material/Box'
-import Modal from '@mui/material/Modal'
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { addProduct } from '../../redux/cartRedux';
+import Box from '@mui/material/Box';
+import Modal from '@mui/material/Modal';
 import {
   AddContainer,
   Amount,
@@ -16,8 +16,8 @@ import {
   FilterTitle,
   Image,
   Title,
-} from './PopupStyles'
-import { Add, Remove, ShoppingCartOutlined } from '@material-ui/icons'
+} from './PopupStyles';
+import { Add, Remove, ShoppingCartOutlined } from '@material-ui/icons';
 
 const style = {
   position: 'absolute',
@@ -33,31 +33,31 @@ const style = {
   borderRadius: '20px',
   boxShadow: 24,
   p: 4,
-}
+};
 
 export const BasicModal = ({ item, iconColor }) => {
-  const [quantity, setQuantity] = useState(1)
-  const [color, setColor] = useState('')
-  const [size, setSize] = useState('')
-  const [open, setOpen] = useState(false)
-  const handleOpen = () => setOpen(true)
-  const handleClose = () => setOpen(false)
-  const dispatch = useDispatch()
+  const [quantity, setQuantity] = useState(1);
+  const [color, setColor] = useState(item.color[0]);
+  const [size, setSize] = useState(item.size[0]);
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+  const dispatch = useDispatch();
 
-  const product = { ...item, quantity, color, size }
+  const product = { ...item, quantity, color, size };
 
   const handleQuantity = (type) => {
     if (type === 'dec') {
-      quantity > 1 && setQuantity(quantity - 1)
+      quantity > 1 && setQuantity(quantity - 1);
     } else {
-      setQuantity(quantity + 1)
+      setQuantity(quantity + 1);
     }
-  }
+  };
 
   const handleClick = () => {
-    dispatch(addProduct(product))
-    setOpen(false)
-  }
+    dispatch(addProduct(product));
+    setOpen(false);
+  };
 
   return (
     <>
@@ -105,5 +105,5 @@ export const BasicModal = ({ item, iconColor }) => {
         </Box>
       </Modal>
     </>
-  )
-}
+  );
+};

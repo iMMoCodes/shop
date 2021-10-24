@@ -1,9 +1,9 @@
-import { NavLink } from '../../AppStyles'
-import { useSelector, useDispatch } from 'react-redux'
-import { logout } from '../../redux/userRedux'
-import { ShoppingCartOutlined, ExitToApp } from '@material-ui/icons'
-import { Badge } from '@material-ui/core'
-import { SearchModal } from '../SearchModal/SearchModal'
+import { NavLink } from '../../AppStyles';
+import { useSelector, useDispatch } from 'react-redux';
+import { logout } from '../../redux/userRedux';
+import { ShoppingCartOutlined, ExitToApp } from '@material-ui/icons';
+import { Badge } from '@material-ui/core';
+import { SearchModal } from '../SearchModal/SearchModal';
 import {
   Container,
   Wrapper,
@@ -15,18 +15,19 @@ import {
   Right,
   MenuItem,
   Image,
-} from './NavbarStyles'
-import { deleteCart } from '../../redux/cartRedux'
+  LogoImage,
+} from './NavbarStyles';
+import { deleteCart } from '../../redux/cartRedux';
 
 const Navbar = () => {
-  const quantity = useSelector((state) => state.cart.quantity)
-  const user = useSelector((state) => state.user.currentUser)
-  const dispatch = useDispatch()
+  const quantity = useSelector((state) => state.cart.quantity);
+  const user = useSelector((state) => state.user.currentUser);
+  const dispatch = useDispatch();
 
   const handleLogout = () => {
-    dispatch(logout())
-    dispatch(deleteCart())
-  }
+    dispatch(logout());
+    dispatch(deleteCart());
+  };
   return (
     <Container>
       <Wrapper>
@@ -38,7 +39,10 @@ const Navbar = () => {
         </Left>
         <Center>
           <NavLink to='/'>
-            <Logo>ImmoStore</Logo>
+            <Logo>
+              ImmoStore
+              <LogoImage src='/Loogo.png' />
+            </Logo>
           </NavLink>
         </Center>
         <Right>
@@ -78,7 +82,7 @@ const Navbar = () => {
         </Right>
       </Wrapper>
     </Container>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;
