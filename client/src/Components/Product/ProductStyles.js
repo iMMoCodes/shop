@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 export const Info = styled.div`
   opacity: 0;
@@ -13,7 +13,7 @@ export const Info = styled.div`
   align-items: center;
   justify-content: center;
   transition: all 0.5s ease;
-`
+`;
 
 export const Container = styled.div`
   /* flex: 1; */
@@ -31,18 +31,18 @@ export const Container = styled.div`
     opacity: 1;
     border-radius: 20px;
   }
-`
+`;
 export const Circle = styled.div`
   width: 200px;
   height: 200px;
   border-radius: 50%;
   background-color: white;
   position: absolute;
-`
+`;
 export const Image = styled.img`
   height: 75%;
   z-index: 2;
-`
+`;
 
 export const Icon = styled.div`
   width: 40px;
@@ -60,4 +60,4 @@ export const Icon = styled.div`
     background-color: #e9f5f5;
     transform: scale(1.1);
   }
-`
+`;
