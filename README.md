@@ -9,11 +9,11 @@ An E-commerce website
 
 **Client:** React
 
+**Server:** Node, Express, MongoDB
+
 **Styling:** Styled Components, Material UI
 
 **Others:** Redux,Axios,Firebase,Stripe
-
-**Server:** Node, Express, MongoDB
 
 
   
