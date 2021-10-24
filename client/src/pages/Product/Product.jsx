@@ -1,13 +1,13 @@
-import { Add, Remove } from '@material-ui/icons'
-import { useState, useEffect } from 'react'
-import { useLocation } from 'react-router'
-import { useDispatch } from 'react-redux'
-import { addProduct } from '../../redux/cartRedux'
-import Announcement from '../../Components/Announcement/Announcement'
-import Footer from '../../Components/Footer/Footer'
-import Navbar from '../../Components/Navbar/Navbar'
-import Newsletter from '../../Components/Newsletter/Newsletter'
-import { publicRequest } from '../../requestMethods'
+import { Add, Remove } from '@material-ui/icons';
+import { useState, useEffect } from 'react';
+import { useLocation } from 'react-router';
+import { useDispatch } from 'react-redux';
+import { addProduct } from '../../redux/cartRedux';
+import Announcement from '../../Components/Announcement/Announcement';
+import Footer from '../../Components/Footer/Footer';
+import Navbar from '../../Components/Navbar/Navbar';
+import Newsletter from '../../Components/Newsletter/Newsletter';
+import { publicRequest } from '../../requestMethods';
 import {
   Container,
   Wrapper,
@@ -27,40 +27,42 @@ import {
   AmountContainer,
   Amount,
   Button,
-} from './ProductStyles'
+} from './ProductStyles';
 
 const Product = () => {
-  const location = useLocation()
-  const id = location.pathname.split('/')[2]
-  const [product, setProduct] = useState({})
-  const [quantity, setQuantity] = useState(1)
-  const [color, setColor] = useState('')
-  const [size, setSize] = useState('')
-  const dispatch = useDispatch()
+  const location = useLocation();
+  const id = location.pathname.split('/')[2];
+  const [product, setProduct] = useState({});
+  const [quantity, setQuantity] = useState(1);
+  const [color, setColor] = useState('');
+  const [size, setSize] = useState('');
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const getProduct = async () => {
       try {
-        const res = await publicRequest.get(`/products/find/${id}`)
-        setProduct(res.data)
+        const res = await publicRequest.get(`/products/find/${id}`);
+        setProduct(res.data);
+        setColor(res.data?.color[0]);
+        setSize(res.data?.size[0]);
       } catch (err) {
-        console.log(err)
+        console.log(err);
       }
-    }
-    getProduct()
-  }, [id])
+    };
+    getProduct();
+  }, [id]);
 
   const handleQuantity = (type) => {
     if (type === 'dec') {
-      quantity > 1 && setQuantity(quantity - 1)
+      quantity > 1 && setQuantity(quantity - 1);
     } else {
-      setQuantity(quantity + 1)
+      setQuantity(quantity + 1);
     }
-  }
+  };
 
   const handleClick = () => {
-    dispatch(addProduct({ ...product, quantity, color, size }))
-  }
+    dispatch(addProduct({ ...product, quantity, color, size }));
+  };
 
   return (
     <Container>
@@ -103,7 +105,7 @@ const Product = () => {
       <Newsletter />
       <Footer />
     </Container>
-  )
-}
+  );
+};
 
-export default Product
+export default Product;
