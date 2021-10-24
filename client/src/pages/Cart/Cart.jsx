@@ -54,18 +54,33 @@ const Cart = () => {
   const history = useHistory();
   const dispatch = useDispatch();
 
-  const handleClick = (type, product) => {
+  const handleClick = (type, product, index) => {
     if (type === 'dec' && product.quantity === 1) {
       dispatch(
-        deleteProduct({ id: product._id, quantity: -1, price: product.price })
+        deleteProduct({
+          id: product._id,
+          quantity: -1,
+          price: product.price,
+          index,
+        })
       );
     } else if (type === 'dec') {
       dispatch(
-        updateProduct({ id: product._id, quantity: -1, price: product.price })
+        updateProduct({
+          id: product._id,
+          quantity: -1,
+          price: product.price,
+          index,
+        })
       );
     } else {
       dispatch(
-        updateProduct({ id: product._id, quantity: 1, price: product.price })
+        updateProduct({
+          id: product._id,
+          quantity: 1,
+          price: product.price,
+          index,
+        })
       );
     }
   };
@@ -136,9 +151,11 @@ const Cart = () => {
                 </ProductDetail>
                 <PriceDetail>
                   <ProductAmountContainer>
-                    <Remove onClick={() => handleClick('dec', product)} />
+                    <Remove
+                      onClick={() => handleClick('dec', product, index)}
+                    />
                     <ProductAmount>{product.quantity}</ProductAmount>
-                    <Add onClick={() => handleClick('inc', product)} />
+                    <Add onClick={() => handleClick('inc', product, index)} />
                   </ProductAmountContainer>
                   <ProductPrice>
                     {product.price * product.quantity} €
