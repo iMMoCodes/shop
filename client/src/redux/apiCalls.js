@@ -94,6 +94,38 @@ export const getProducts = async (dispatch, category) => {
     dispatch(getProductFailure());
   }
 };
+// // DELETE PRODUCT
+// export const deleteProduct = async (id, dispatch) => {
+//   dispatch(deleteProductStart());
+//   try {
+//     await userRequest.delete(`/products/${id}`, {
+//       withCredentials: true,
+//     });
+//     dispatch(deleteProductSuccess(id));
+//   } catch (err) {
+//     dispatch(deleteProductFailure());
+//   }
+// };
+// // UPDATE PRODUCT
+// export const updateProduct = async (id, product, dispatch) => {
+//   dispatch(updateProductStart())
+//   try {
+//     await userRequest.patch(`/products/${id}`)
+//     dispatch(updateProductSuccess({ id, product }))
+//   } catch (err) {
+//     dispatch(updateProductFailure())
+//   }
+// }
+// // CREATE PRODUCT
+// export const createProduct = async (product, dispatch) => {
+//   dispatch(createProductStart())
+//   try {
+//     const res = await userRequest.post(`/products/`, product)
+//     dispatch(createProductSuccess(res.data))
+//   } catch (err) {
+//     dispatch(createProductFailure())
+//   }
+// }
 
 // ADD TO WISHLIST
 export const addWishList = async (dispatch, userId, product) => {
