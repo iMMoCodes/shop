@@ -1,4 +1,3 @@
-import { NavLink } from '../../../AppStyles';
 import {
   getStorage,
   ref,
@@ -17,7 +16,6 @@ import {
 import {
   Bottom,
   BottomTitle,
-  Button,
   Container,
   Desc,
   Form,
@@ -50,27 +48,38 @@ import Sidebar from '../../Components/Sidebar/Sidebar';
 import { useCallback, useEffect, useState } from 'react';
 import { userRequest } from '../../../requestMethods';
 import { useLocation } from 'react-router';
-import { useDispatch } from 'react-redux';
-import { updateMe } from '../../../redux/apiCalls';
 
 const User = () => {
   const location = useLocation();
-  const dispatch = useDispatch();
   const id = location.pathname.split('/')[3];
   const [file, setFile] = useState(null);
   const [user, setUser] = useState({});
   const [inputs, setInputs] = useState({});
 
   const getUser = useCallback(async () => {
-    const res = await userRequest.get(`/users/find/${id}`, {
-      withCredentials: true,
-    });
-    setUser(res.data);
+    try {
+      const res = await userRequest.get(`/users/find/${id}`, {
+        withCredentials: true,
+      });
+      setUser(res.data);
+    } catch (err) {
+      console.log(err);
+    }
   }, [id]);
 
   useEffect(() => {
     getUser();
   }, [getUser]);
+
+  const updateUser = async (user) => {
+    try {
+      await userRequest.patch(`/users/${id}`, user, {
+        withCredentials: true,
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const handleChange = (e) => {
     setInputs((prev) => {
@@ -116,12 +125,12 @@ const User = () => {
           // For instance, get the download URL: https://firebasestorage.googleapis.com/...
           getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
             const updatedUser = { ...inputs, image: downloadURL };
-            updateMe(dispatch, updatedUser);
+            updateUser(updatedUser);
           });
         }
       );
     } else {
-      updateMe(dispatch, { ...inputs });
+      updateUser({ ...inputs });
     }
   };
 
@@ -133,9 +142,6 @@ const User = () => {
         <Wrapper>
           <TitleContainer>
             <Title>Edit User</Title>
-            <NavLink to='/admin/createuser'>
-              <Button>Create</Button>
-            </NavLink>
           </TitleContainer>
           <UserContainer>
             <Show>
@@ -161,7 +167,7 @@ const User = () => {
                 <BottomTitle>Contact Details</BottomTitle>
                 <UserInfo>
                   <PhoneAndroid style={{ fontSize: '16px' }} />
-                  <InfoTitle>+1 234 567</InfoTitle>
+                  <InfoTitle>{user.phoneNumber}</InfoTitle>
                 </UserInfo>
                 <UserInfo>
                   <MailOutline style={{ fontSize: '16px' }} />
@@ -169,7 +175,7 @@ const User = () => {
                 </UserInfo>
                 <UserInfo>
                   <LocationSearching style={{ fontSize: '16px' }} />
-                  <InfoTitle>Somewhere, Finland 99999</InfoTitle>
+                  <InfoTitle>{user.address}</InfoTitle>
                 </UserInfo>
               </Bottom>
             </Show>
@@ -215,11 +221,19 @@ const User = () => {
                   </UpdateItem>
                   <UpdateItem>
                     <ItemTitle>Phone</ItemTitle>
-                    <Input type='text' placeholder='+1 234 567' />
+                    <Input
+                      type='text'
+                      name='phoneNumber'
+                      placeholder={user.phoneNumber}
+                    />
                   </UpdateItem>
                   <UpdateItem>
                     <ItemTitle>Address</ItemTitle>
-                    <Input type='text' placeholder='Tampere, Finland' />
+                    <Input
+                      type='text'
+                      name='address'
+                      placeholder={user.address}
+                    />
                   </UpdateItem>
                 </Left>
                 <Right>

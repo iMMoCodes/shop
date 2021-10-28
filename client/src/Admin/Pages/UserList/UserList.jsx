@@ -1,6 +1,15 @@
 import { useEffect, useState } from 'react';
 import { NavLink } from '../../../AppStyles';
-import { Container, User, Image, Button, Wrapper } from './UserListStyles';
+import {
+  Container,
+  User,
+  Image,
+  Button,
+  Wrapper,
+  CreateButton,
+  TitleContainer,
+  Title,
+} from './UserListStyles';
 import { DataGrid } from '@mui/x-data-grid';
 import { DeleteOutline } from '@material-ui/icons';
 import Topbar from '../../Components/Topbar/Topbar';
@@ -79,6 +88,12 @@ const UserList = () => {
       <Container>
         <Sidebar />
         <Wrapper>
+          <TitleContainer>
+            <Title>Users</Title>
+            <NavLink to='/admin/createuser'>
+              <CreateButton>Create</CreateButton>
+            </NavLink>
+          </TitleContainer>
           <DataGrid
             rows={rows}
             disableSelectionOnClick

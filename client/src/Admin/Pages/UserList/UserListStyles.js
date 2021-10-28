@@ -6,7 +6,24 @@ export const Container = styled.div`
 export const Wrapper = styled.div`
   flex: 4;
   padding: 20px;
+  height: 80vh;
   /* width: calc(100vw - 200px); */
+`;
+export const TitleContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+export const Title = styled.h1``;
+export const CreateButton = styled.button`
+  width: 80px;
+  border: none;
+  padding: 5px;
+  background-color: teal;
+  border-radius: 7px;
+  cursor: pointer;
+  color: white;
+  font-size: 16px;
 `;
 export const User = styled.div`
   display: flex;

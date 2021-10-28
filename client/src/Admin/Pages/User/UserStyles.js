@@ -12,16 +12,6 @@ export const TitleContainer = styled.div`
   justify-content: space-between;
 `;
 export const Title = styled.h1``;
-export const Button = styled.button`
-  width: 80px;
-  border: none;
-  padding: 5px;
-  background-color: teal;
-  border-radius: 7px;
-  cursor: pointer;
-  color: white;
-  font-size: 16px;
-`;
 
 export const UserContainer = styled.div`
   display: flex;
